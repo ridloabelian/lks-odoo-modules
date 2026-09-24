@@ -132,7 +132,7 @@
                             </t>
                             <t t-else="">
                                 <div class="o_kanban_image_fill_left d-flex align-items-center justify-content-center bg-light text-muted">
-                                    <i class="fa fa-user fa-3x"/>
+                                    <i class="fa fa-user fa-3x" title="Foto Klien"/>
                                 </div>
                             </t>
                             <div class="oe_kanban_details ps-2">
@@ -149,7 +149,7 @@
                                     <span class="badge text-bg-primary"><field name="ppks_category_id"/></span>
                                 </div>
                                 <div class="small text-muted mb-1" t-if="record.residential_status.raw_value == 'in_facility'">
-                                    <i class="fa fa-bed me-1 text-primary"/> <field name="dormitory_id"/> - <field name="room_id"/>
+                                    <i class="fa fa-bed me-1 text-primary" title="Kamar Asrama"/> <field name="dormitory_id"/> - <field name="room_id"/>
                                 </div>
                                 <div class="o_kanban_record_bottom mt-2 pt-1 border-top">
                                     <div class="oe_kanban_bottom_left">
@@ -194,7 +194,7 @@
                 <separator/>
                 <filter string="Anak-anak (0 - 17 Thn)" name="filter_children" domain="[('age', '&lt;', 18)]"/>
                 <filter string="Lanjut Usia (&gt;= 60 Thn)" name="filter_elderly" domain="[('age', '&gt;=', 60)]"/>
-                <group expand="0" string="Kelompokkan Berdasarkan">
+                <group name="group_by">
                     <filter string="Kategori PPKS" name="group_by_ppks" context="{'group_by': 'ppks_category_id'}"/>
                     <filter string="Status Residensial" name="group_by_residence" context="{'group_by': 'residential_status'}"/>
                     <filter string="Status Layanan" name="group_by_service" context="{'group_by': 'service_status'}"/>

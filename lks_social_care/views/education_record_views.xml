@@ -105,7 +105,7 @@
                 <filter string="SMP/MTs" name="filter_smp" domain="[('level', '=', 'smp')]"/>
                 <filter string="SMA/SMK" name="filter_sma" domain="[('level', 'in', ['sma', 'smk'])]"/>
                 <filter string="SLB" name="filter_slb" domain="[('level', '=', 'slb')]"/>
-                <group expand="0" string="Kelompokkan Berdasarkan">
+                <group name="group_by">
                     <filter string="Jenjang Pendidikan" name="group_by_level" context="{'group_by': 'level'}"/>
                     <filter string="Nama Sekolah" name="group_by_school" context="{'group_by': 'school_name'}"/>
                     <filter string="Status" name="group_by_status" context="{'group_by': 'status'}"/>

@@ -7,7 +7,7 @@
             <form string="Ekspor Data Binaan Format SIKS-NG Kemensos &amp; Dinsos">
                 <sheet>
                     <field name="state" invisible="1"/>
-                    <t t-if="state == 'draft'">
+                    <div invisible="state != 'draft'">
                         <div class="alert alert-info text-center" role="alert">
                             <strong>Ekspor Data Penerima Manfaat PPKS Format Resmi SIKS-NG Kemensos RI</strong><br/>
                             Berkas yang dihasilkan berisi 34 kolom standar pelaporan Dinas Sosial &amp; SIKS-NG termasuk NIK, KK, Alamat Kemendagri, dan Pekerja Sosial Pendamping.
@@ -23,10 +23,10 @@
                                 <field name="file_format" widget="radio"/>
                             </group>
                         </group>
-                    </t>
-                    <t t-if="state == 'done'">
+                    </div>
+                    <div invisible="state != 'done'">
                         <div class="alert alert-success text-center" role="alert">
-                            <i class="fa fa-check-circle fa-2x mb-2"/><br/>
+                            <i class="fa fa-check-circle fa-2x mb-2" title="Sukses"/><br/>
                             <strong>File Data Binaan SIKS-NG Berhasil Digenerate!</strong><br/>
                             Silakan klik tautan di bawah ini untuk mengunduh berkas CSV.
                         </div>
@@ -34,7 +34,7 @@
                             <field name="export_filename" invisible="1"/>
                             <field name="export_file" filename="export_filename"/>
                         </group>
-                    </t>
+                    </div>
                 </sheet>
                 <footer>
                     <button name="action_generate_export" string="Generate Data Ekspor SIKS-NG" type="object"

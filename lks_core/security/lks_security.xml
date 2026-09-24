@@ -9,7 +9,6 @@
     <!-- Group 1: Pengasuh / Staf Asrama (Caregiver) -->
     <record id="group_lks_caregiver" model="res.groups">
         <field name="name">Pengasuh / Staf Asrama</field>
-        <field name="category_id" ref="category_lks_management"/>
         <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
         <field name="comment">Pengguna dapat mencatat kehadiran harian, data tempat tidur/kamar, dan melihat profil dasar klien asuhan.</field>
     </record>
@@ -17,7 +16,6 @@
     <!-- Group 2: Pekerja Sosial / Sakti Peksos (Social Worker) -->
     <record id="group_lks_social_worker" model="res.groups">
         <field name="name">Pekerja Sosial (Peksos)</field>
-        <field name="category_id" ref="category_lks_management"/>
         <field name="implied_ids" eval="[(4, ref('group_lks_caregiver'))]"/>
         <field name="comment">Pekerja sosial profesional / Sakti Peksos bertugas mengelola Case Management, Asesmen, Rencana Intervensi, dan Terminasi.</field>
     </record>
@@ -25,9 +23,8 @@
     <!-- Group 3: Pimpinan LKS / Kepala Panti (Manager) -->
     <record id="group_lks_manager" model="res.groups">
         <field name="name">Pimpinan LKS / Kepala Panti</field>
-        <field name="category_id" ref="category_lks_management"/>
         <field name="implied_ids" eval="[(4, ref('group_lks_social_worker'))]"/>
-        <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+        <field name="user_ids" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
         <field name="comment">Akses penuh pengelolaan panti, verifikasi legalitas, persetujuan penerimaan dan terminasi klien, serta konfigurasi master data.</field>
     </record>
 

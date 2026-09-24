@@ -108,27 +108,27 @@ class LksMedicalRecord(models.Model):
     )
     visit_count = fields.Integer(
         string="Jumlah Kunjungan Berobat",
-        compute="_compute_visit_stats",
+        compute="_compute_visit_count",
     )
     # Parameter Fisik Terkini
     latest_weight = fields.Float(
         string="Berat Badan Terkini (kg)",
-        compute="_compute_visit_stats",
+        compute="_compute_latest_vitals",
         store=True,
     )
     latest_height = fields.Float(
         string="Tinggi Badan Terkini (cm)",
-        compute="_compute_visit_stats",
+        compute="_compute_latest_vitals",
         store=True,
     )
     latest_bmi = fields.Float(
         string="Indeks Massa Tubuh (IMT)",
-        compute="_compute_visit_stats",
+        compute="_compute_latest_vitals",
         store=True,
     )
     latest_bmi_status = fields.Char(
         string="Status Gizi (IMT)",
-        compute="_compute_visit_stats",
+        compute="_compute_latest_vitals",
         store=True,
     )
     company_id = fields.Many2one(
@@ -138,14 +138,21 @@ class LksMedicalRecord(models.Model):
         required=True,
     )
 
-    _sql_constraints = [
-        ("partner_uniq", "unique(partner_id)", "Rekam Medis untuk klien PPKS ini sudah ada!"),
-    ]
+    if hasattr(models, "Constraint"):
+        _partner_uniq = models.Constraint("unique(partner_id)", "Rekam Medis untuk klien PPKS ini sudah ada!")
+    else:
+        _sql_constraints = [
+            ("partner_uniq", "unique(partner_id)", "Rekam Medis untuk klien PPKS ini sudah ada!"),
+        ]
 
-    @api.depends("visit_ids.weight", "visit_ids.height", "visit_ids.date")
-    def _compute_visit_stats(self):
+    @api.depends("visit_ids")
+    def _compute_visit_count(self):
         for rec in self:
             rec.visit_count = len(rec.visit_ids)
+
+    @api.depends("visit_ids.weight", "visit_ids.height", "visit_ids.date")
+    def _compute_latest_vitals(self):
+        for rec in self:
             latest_visit = rec.visit_ids.sorted(key=lambda v: (v.date or fields.Date.min, v.id), reverse=True)
             if latest_visit and latest_visit[0].weight and latest_visit[0].height:
                 w = latest_visit[0].weight
@@ -304,7 +311,7 @@ class LksMedicalVisit(models.Model):
     )
     blood_pressure = fields.Char(
         string="Tekanan Darah (mmHg)",
-        placeholder="misal: 120/80",
+        help="Contoh: 120/80 mmHg",
     )
     body_temperature = fields.Float(
         string="Suhu Tubuh (°C)",
