@@ -75,8 +75,9 @@ class LksSiksngExportWizard(models.TransientModel):
 
         domain = [
             ("is_ppks", "=", True),
-            ("company_id", "=", self.company_id.id),
         ]
+        if self.company_id:
+            domain += ["|", ("company_id", "=", False), ("company_id", "=", self.company_id.id)]
         if self.ppks_category_id:
             domain.append(("ppks_category_id", "=", self.ppks_category_id.id))
 

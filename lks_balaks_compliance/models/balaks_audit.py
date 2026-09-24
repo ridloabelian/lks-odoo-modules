@@ -229,7 +229,7 @@ class LksBalaksAuditLine(models.Model):
         string="Nama File Eviden",
     )
 
-    @api.constrains("score_obtained", "max_score")
+    @api.constrains("score_obtained")
     def _check_score(self):
         for rec in self:
             if rec.score_obtained > rec.max_score or rec.score_obtained < 0:
