@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_partner_form_social_care_inherit" model="ir.ui.view">
+        <field name="name">res.partner.form.social.care.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="priority">45</field>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button class="oe_stat_button" type="object" name="action_view_education_records"
+                        icon="fa-graduation-cap" invisible="not is_ppks">
+                    <field name="education_count" widget="statinfo" string="Pendidikan"/>
+                </button>
+                <button class="oe_stat_button" type="object" name="action_view_medical_record"
+                        icon="fa-heartbeat" invisible="not is_ppks">
+                    <div class="o_stat_info">
+                        <span class="o_stat_text">Rekam</span>
+                        <span class="o_stat_text">Medis</span>
+                    </div>
+                </button>
+                <button class="oe_stat_button" type="object" name="action_view_case_plans"
+                        icon="fa-tasks" invisible="not is_ppks">
+                    <field name="case_plan_count" widget="statinfo" string="Case Plan"/>
+                </button>
+                <button class="oe_stat_button" type="object" name="action_view_terminations"
+                        icon="fa-home" invisible="not is_ppks">
+                    <field name="termination_count" widget="statinfo" string="Reuni / Terminasi"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+</odoo>

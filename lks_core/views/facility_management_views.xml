@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ====================================================================== -->
+    <!-- DORMITORY / ASRAMA VIEWS                                               -->
+    <!-- ====================================================================== -->
+    <record id="view_lks_dormitory_tree" model="ir.ui.view">
+        <field name="name">lks.facility.dormitory.tree</field>
+        <field name="model">lks.facility.dormitory</field>
+        <field name="arch" type="xml">
+            <list string="Asrama / Wisma Panti">
+                <field name="code"/>
+                <field name="name"/>
+                <field name="facility_type" widget="badge"/>
+                <field name="gender_target"/>
+                <field name="room_count"/>
+                <field name="total_capacity"/>
+                <field name="total_occupants"/>
+                <field name="available_beds" decoration-danger="available_beds == 0" decoration-success="available_beds &gt; 0"/>
+                <field name="occupancy_rate" widget="progressbar"/>
+                <field name="manager_id"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_lks_dormitory_kanban" model="ir.ui.view">
+        <field name="name">lks.facility.dormitory.kanban</field>
+        <field name="model">lks.facility.dormitory</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_dashboard">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="facility_type"/>
+                <field name="total_capacity"/>
+                <field name="total_occupants"/>
+                <field name="available_beds"/>
+                <field name="occupancy_rate"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click p-3">
+                            <div class="o_kanban_card_header">
+                                <div class="o_kanban_card_header_title">
+                                    <div class="fw-bold fs-5 text-primary"><field name="name"/></div>
+                                    <span class="badge text-bg-light"><field name="code"/></span>
+                                    <span class="badge text-bg-info ms-1"><field name="facility_type"/></span>
+                                </div>
+                            </div>
+                            <div class="container o_kanban_card_content mt-3">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="text-muted small">Penghuni / Kapasitas</div>
+                                        <div class="fs-5 fw-semibold">
+                                            <t t-esc="record.total_occupants.value"/> / <t t-esc="record.total_capacity.value"/> Bed
+                                        </div>
+                                    </div>
+                                    <div class="col-6 text-end">
+                                        <div class="text-muted small">Sisa Bed Kosong</div>
+                                        <div class="fs-5 fw-bold text-success">
+                                            <t t-esc="record.available_beds.value"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-2">
+                                    <field name="occupancy_rate" widget="progressbar"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="view_lks_dormitory_form" model="ir.ui.view">
+        <field name="name">lks.facility.dormitory.form</field>
+        <field name="model">lks.facility.dormitory</field>
+        <field name="arch" type="xml">
+            <form string="Asrama / Fasilitas Panti">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" string="Nama Asrama / Wisma"/>
+                        <h1>
+                            <field name="name" placeholder="misal: Asrama Putra Al-Falah"/>
+                        </h1>
+                        <h3>
+                            <field name="code" placeholder="Kode (misal: ASM-01)"/>
+                        </h3>
+                    </div>
+                    <group>
+                        <group name="general_info">
+                            <field name="facility_type"/>
+                            <field name="gender_target"/>
+                            <field name="manager_id"/>
+                            <field name="caregiver_ids" widget="many2many_tags"/>
+                        </group>
+                        <group name="occupancy_stats">
+                            <field name="room_count"/>
+                            <field name="total_capacity"/>
+                            <field name="total_occupants"/>
+                            <field name="available_beds" decoration-danger="available_beds == 0" decoration-success="available_beds &gt; 0"/>
+                            <field name="occupancy_rate" widget="progressbar"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                    <group string="Lokasi &amp; Alamat">
+                        <field name="address" placeholder="Alamat lengkap lokasi gedung/asrama..."/>
+                    </group>
+                    <notebook>
+                        <page string="Daftar Kamar" name="rooms">
+                            <field name="room_ids">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                    <field name="floor"/>
+                                    <field name="capacity"/>
+                                    <field name="occupant_count"/>
+                                    <field name="available_beds"/>
+                                    <field name="status" widget="badge"
+                                           decoration-success="status == 'available'"
+                                           decoration-danger="status == 'full'"
+                                           decoration-warning="status == 'maintenance'"/>
+                                    <field name="amenities"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_lks_dormitory" model="ir.actions.act_window">
+        <field name="name">Asrama &amp; Gedung Panti</field>
+        <field name="res_model">lks.facility.dormitory</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Kelola data asrama, gedung, dan wisma tempat tinggal klien PPKS panti.
+            </p>
+        </field>
+    </record>
+
+    <!-- ====================================================================== -->
+    <!-- ROOM / KAMAR VIEWS                                                     -->
+    <!-- ====================================================================== -->
+    <record id="view_lks_room_tree" model="ir.ui.view">
+        <field name="name">lks.facility.room.tree</field>
+        <field name="model">lks.facility.room</field>
+        <field name="arch" type="xml">
+            <list string="Kamar &amp; Ruangan">
+                <field name="name"/>
+                <field name="dormitory_id"/>
+                <field name="floor"/>
+                <field name="capacity"/>
+                <field name="occupant_count"/>
+                <field name="available_beds" decoration-danger="available_beds == 0" decoration-success="available_beds &gt; 0"/>
+                <field name="status" widget="badge"
+                       decoration-success="status == 'available'"
+                       decoration-danger="status == 'full'"
+                       decoration-warning="status == 'maintenance'"/>
+                <field name="amenities"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_lks_room_form" model="ir.ui.view">
+        <field name="name">lks.facility.room.form</field>
+        <field name="model">lks.facility.room</field>
+        <field name="arch" type="xml">
+            <form string="Kamar / Ruangan Panti">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" string="Nomor / Nama Kamar"/>
+                        <h1>
+                            <field name="name" placeholder="misal: Kamar 101 / Ruang Melati"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group name="room_info">
+                            <field name="dormitory_id"/>
+                            <field name="floor"/>
+                            <field name="capacity"/>
+                            <field name="status" widget="badge"/>
+                        </group>
+                        <group name="occupant_info">
+                            <field name="occupant_count"/>
+                            <field name="available_beds"/>
+                            <field name="amenities"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Daftar Klien yang Menghuni" name="occupants">
+                            <field name="occupant_ids">
+                                <list>
+                                    <field name="registration_number"/>
+                                    <field name="name"/>
+                                    <field name="gender"/>
+                                    <field name="age"/>
+                                    <field name="ppks_category_id"/>
+                                    <field name="bed_number"/>
+                                    <field name="intake_date"/>
+                                    <field name="service_status" widget="badge"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_lks_room" model="ir.actions.act_window">
+        <field name="name">Kamar &amp; Ruangan Panti</field>
+        <field name="res_model">lks.facility.room</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Kelola pembagian kamar tidur penghuni panti asuhan/panti wreda.
+            </p>
+        </field>
+    </record>
+</odoo>

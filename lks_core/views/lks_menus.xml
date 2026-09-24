@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Top Level Menu: Lembaga Kesejahteraan Sosial (LKS) -->
+    <menuitem id="menu_lks_root"
+              name="LKS Kemensos"
+              sequence="20"
+              web_icon="lks_core,static/description/icon.png"/>
+
+    <!-- Submenu: Buku Induk & Klien PPKS -->
+    <menuitem id="menu_lks_clients_main"
+              name="Buku Induk &amp; Klien PPKS"
+              parent="menu_lks_root"
+              sequence="10"/>
+
+    <menuitem id="menu_lks_clients_all"
+              name="Semua Klien PPKS"
+              parent="menu_lks_clients_main"
+              action="action_lks_ppks_clients"
+              sequence="10"/>
+
+    <menuitem id="menu_lks_clients_in_facility"
+              name="Dalam Panti (Residensial)"
+              parent="menu_lks_clients_main"
+              action="action_lks_ppks_in_facility"
+              sequence="20"/>
+
+    <menuitem id="menu_lks_clients_out_facility"
+              name="Luar Panti (Bina Keluarga)"
+              parent="menu_lks_clients_main"
+              action="action_lks_ppks_out_facility"
+              sequence="30"/>
+
+    <menuitem id="menu_lks_admission_register"
+              name="Buku Induk Penerimaan"
+              parent="menu_lks_clients_main"
+              action="action_lks_admission_register"
+              sequence="40"/>
+
+    <!-- Submenu: Fasilitas Panti -->
+    <menuitem id="menu_lks_facility_main"
+              name="Fasilitas Panti"
+              parent="menu_lks_root"
+              sequence="20"/>
+
+    <menuitem id="menu_lks_dormitory"
+              name="Asrama &amp; Gedung"
+              parent="menu_lks_facility_main"
+              action="action_lks_dormitory"
+              sequence="10"/>
+
+    <menuitem id="menu_lks_room"
+              name="Kamar &amp; Ruangan"
+              parent="menu_lks_facility_main"
+              action="action_lks_room"
+              sequence="20"/>
+
+    <!-- Submenu: Konfigurasi -->
+    <menuitem id="menu_lks_config_main"
+              name="Konfigurasi"
+              parent="menu_lks_root"
+              sequence="90"/>
+
+    <menuitem id="menu_lks_ppks_category"
+              name="26 Kategori PPKS Kemensos"
+              parent="menu_lks_config_main"
+              action="action_lks_ppks_category"
+              sequence="10"/>
+</odoo>

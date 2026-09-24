@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_buku_induk_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <div class="article page" style="font-family: 'Times New Roman', Times, serif; font-size: 13px; line-height: 1.5; color: #111;">
+                    <!-- Kop Surat Resmi -->
+                    <div style="text-align: center; border-bottom: 3px double #000; padding-bottom: 12px; margin-bottom: 20px;">
+                        <table style="width: 100%;">
+                            <tr>
+                                <td style="width: 15%; text-align: left; vertical-align: middle;">
+                                    <img t-if="doc.company_id.logo" t-att-src="image_data_uri(doc.company_id.logo)" style="max-height: 70px;"/>
+                                </td>
+                                <td style="width: 85%; text-align: center; vertical-align: middle;">
+                                    <div style="font-size: 16px; font-weight: bold; text-transform: uppercase;">
+                                        <t t-esc="doc.company_id.name"/>
+                                    </div>
+                                    <div style="font-size: 13px; font-weight: bold;">
+                                        LEMBAGA KESEJAHTERAAN SOSIAL (LKS) / PANTI ASUHAN SOSIAL
+                                    </div>
+                                    <div style="font-size: 11px;">
+                                        Izin Operasional Dinsos: Terdaftar Resmi | Akreditasi BALAKS Kemensos RI
+                                    </div>
+                                    <div style="font-size: 11px;">
+                                        Alamat: <t t-esc="doc.company_id.street"/>, <t t-esc="doc.company_id.city"/> | Telp: <t t-esc="doc.company_id.phone"/> | Email: <t t-esc="doc.company_id.email"/>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <!-- Judul Dokumen -->
+                    <div style="text-align: center; margin-bottom: 25px;">
+                        <h4 style="margin: 0; font-weight: bold; text-decoration: underline; text-transform: uppercase;">
+                            LEMBAR BUKU INDUK REGISTRASI KLIEN PPKS
+                        </h4>
+                        <div style="font-size: 12px; margin-top: 4px;">
+                            Nomor Induk Registrasi: <strong><t t-esc="doc.registration_number or '-'"/></strong>
+                        </div>
+                    </div>
+
+                    <!-- Bagian I: Data Identitas Pribadi -->
+                    <div style="background-color: #f3f4f6; font-weight: bold; padding: 5px 10px; border: 1px solid #999; margin-bottom: 10px;">
+                        I. IDENTITAS PRIBADI PENERIMA MANFAAT (PPKS)
+                    </div>
+                    <table style="width: 100%; margin-bottom: 15px; border-collapse: collapse;">
+                        <tr>
+                            <td style="width: 30%; padding: 4px;">1. Nama Lengkap</td>
+                            <td style="width: 3%;">:</td>
+                            <td style="width: 67%; font-weight: bold; text-transform: uppercase;"><t t-esc="doc.name"/></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 4px;">2. Nomor Induk Kependudukan (NIK)</td>
+                            <td>:</td>
+                            <td><t t-esc="doc.nik or '-'"/></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 4px;">3. Nomor Kartu Keluarga (No. KK)</td>
+                            <td>:</td>
+                            <td><t t-esc="doc.kk_number or '-'"/></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 4px;">4. Jenis Kelamin / Usia</td>
+                            <td>:</td>
+                            <td>
+                                <t t-if="doc.gender == 'male'">Laki-laki</t>
+                                <t t-elif="doc.gender == 'female'">Perempuan</t>
+                                <t t-else="">-</t>
+                                / <t t-esc="doc.age"/> Tahun
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 4px;">5. Tempat, Tanggal Lahir</td>
+                            <td>:</td>
+                            <td>
+                                <t t-esc="doc.birth_place or '-'"/>,
+                                <t t-if="doc.birth_date" t-esc="doc.birth_date.strftime('%d %B %Y')"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 4px;">6. Agama</td>
+                            <td>:</td>
+                            <td><t t-esc="doc.religion or '-'"/></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 4px;">7. Golongan Darah</td>
+                            <td>:</td>
+                            <td><t t-esc="doc.blood_type or '-'"/></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 4px;">8. Alamat Asal Sesuai KTP/KK</td>
+                            <td>:</td>
+                            <td><t t-esc="doc.full_administrative_address or doc.street or '-'"/></td>
+                        </tr>
+                    </table>
+
+                    <!-- Bagian II: Status Layanan & Klasifikasi PPKS -->
+                    <div style="background-color: #f3f4f6; font-weight: bold; padding: 5px 10px; border: 1px solid #999; margin-bottom: 10px;">
+                        II. STATUS PELAYANAN &amp; KLASIFIKASI PPKS KEMENSOS
+                    </div>
+                    <table style="width: 100%; margin-bottom: 15px; border-collapse: collapse;">
+                        <tr>
+                            <td style="width: 30%; padding: 4px;">1. Kategori PPKS Utama</td>
+                            <td style="width: 3%;">:</td>
+                            <td style="width: 67%; font-weight: bold;"><t t-esc="doc.ppks_category_id.name or '-'"/> (<t t-esc="doc.ppks_category_id.code or '-'"/>)</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 4px;">2. Kluster PPKS</td>
+                            <td>:</td>
+                            <td><t t-esc="doc.ppks_cluster or '-'"/></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 4px;">3. Status Residensial</td>
+                            <td>:</td>
+                            <td>
+                                <t t-if="doc.residential_status == 'in_facility'">Dalam Panti / Asrama (Residensial)</t>
+                                <t t-elif="doc.residential_status == 'day_care'">Penitipan Harian (Day Care)</t>
+                                <t t-else="">Luar Panti / Bina Keluarga</t>
+                            </td>
+                        </tr>
+                        <tr t-if="doc.residential_status == 'in_facility'">
+                            <td style="padding: 4px;">4. Asrama / Kamar / Bed</td>
+                            <td>:</td>
+                            <td>
+                                <t t-esc="doc.dormitory_id.name or '-'"/> - Kamar: <t t-esc="doc.room_id.name or '-'"/> (Bed: <t t-esc="doc.bed_number or '-/'"/>)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 4px;">5. Tanggal Masuk Panti</td>
+                            <td>:</td>
+                            <td><t t-if="doc.intake_date" t-esc="doc.intake_date.strftime('%d %B %Y')"/></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 4px;">6. Sumber Rujukan</td>
+                            <td>:</td>
+                            <td><t t-esc="doc.referral_source or '-'"/> - <t t-esc="doc.referral_notes or ''"/></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 4px;">7. Pekerja Sosial Pendamping (Peksos)</td>
+                            <td>:</td>
+                            <td><strong><t t-esc="doc.social_worker_id.name or '-'"/></strong> (No. STR: <t t-esc="doc.peksos_registration_no or '-/'"/>)</td>
+                        </tr>
+                    </table>
+
+                    <!-- Bagian III: Data Orang Tua / Wali Penanggung Jawab -->
+                    <div style="background-color: #f3f4f6; font-weight: bold; padding: 5px 10px; border: 1px solid #999; margin-bottom: 10px;">
+                        III. DATA WALI / KELUARGA PENANGGUNG JAWAB
+                    </div>
+                    <table style="width: 100%; margin-bottom: 25px; border-collapse: collapse;">
+                        <tr>
+                            <td style="width: 30%; padding: 4px;">1. Nama Wali / Kerabat</td>
+                            <td style="width: 3%;">:</td>
+                            <td style="width: 67%;"><t t-esc="doc.guardian_id.name or '-'"/></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 4px;">2. Hubungan Kekeluargaan</td>
+                            <td>:</td>
+                            <td><t t-esc="doc.guardian_relation or '-'"/></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 4px;">3. No. Telepon / HP Wali</td>
+                            <td>:</td>
+                            <td><t t-esc="doc.guardian_phone or '-'"/></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 4px;">4. Alamat Domisili Wali</td>
+                            <td>:</td>
+                            <td><t t-esc="doc.guardian_address or '-'"/></td>
+                        </tr>
+                    </table>
+
+                    <!-- Tanda Tangan Pengesahan -->
+                    <table style="width: 100%; text-align: center; margin-top: 30px;">
+                        <tr>
+                            <td style="width: 50%;">
+                                Mengetahui,<br/>
+                                <strong>Kepala / Pimpinan Panti</strong><br/><br/><br/><br/>
+                                ( _______________________________ )
+                            </td>
+                            <td style="width: 50%;">
+                                <t t-esc="doc.company_id.city or 'Tempat'"/>, <t t-esc="context_timestamp(datetime.datetime.now()).strftime('%d %B %Y')"/><br/>
+                                <strong>Pekerja Sosial Pendamping</strong><br/><br/><br/><br/>
+                                ( <strong><t t-esc="doc.social_worker_id.name or '_______________________'"/></strong> )<br/>
+                                STR Peksos: <t t-esc="doc.peksos_registration_no or '-'"/>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <template id="report_admission_bast_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <div class="article page" style="font-family: 'Times New Roman', Times, serif; font-size: 13px; line-height: 1.6; color: #111;">
+                    <!-- Kop Surat -->
+                    <div style="text-align: center; border-bottom: 3px double #000; padding-bottom: 10px; margin-bottom: 20px;">
+                        <div style="font-size: 16px; font-weight: bold; text-transform: uppercase;">
+                            <t t-esc="doc.company_id.name"/>
+                        </div>
+                        <div style="font-size: 13px; font-weight: bold;">
+                            LEMBAGA KESEJAHTERAAN SOSIAL (LKS)
+                        </div>
+                        <div style="font-size: 11px;">
+                            Alamat: <t t-esc="doc.company_id.street"/>, <t t-esc="doc.company_id.city"/> | Telp: <t t-esc="doc.company_id.phone"/>
+                        </div>
+                    </div>
+
+                    <!-- Judul -->
+                    <div style="text-align: center; margin-bottom: 20px;">
+                        <h4 style="margin: 0; font-weight: bold; text-decoration: underline; text-transform: uppercase;">
+                            BERITA ACARA SERAH TERIMA PENERIMAAN KLIEN PPKS
+                        </h4>
+                        <div style="font-size: 12px; margin-top: 5px;">
+                            Nomor: <strong><t t-esc="doc.name"/></strong>
+                        </div>
+                    </div>
+
+                    <p>
+                        Pada hari ini, tanggal <strong><t t-if="doc.date_received" t-esc="doc.date_received.strftime('%d %B %Y')"/></strong>, kami yang bertanda tangan di bawah ini:
+                    </p>
+
+                    <table style="width: 100%; margin-left: 15px; margin-bottom: 15px;">
+                        <tr>
+                            <td style="width: 25%; font-weight: bold;">I. PIHAK PENYERAH</td>
+                            <td style="width: 3%;">:</td>
+                            <td style="width: 72%;"></td>
+                        </tr>
+                        <tr>
+                            <td style="padding-left: 15px;">Nama Lengkap</td>
+                            <td>:</td>
+                            <td><strong><t t-esc="doc.surrenderer_name"/></strong></td>
+                        </tr>
+                        <tr>
+                            <td style="padding-left: 15px;">Instansi / Hubungan</td>
+                            <td>:</td>
+                            <td><t t-esc="doc.surrenderer_institution or '-'"/> (<t t-esc="doc.surrenderer_type"/>)</td>
+                        </tr>
+                        <tr>
+                            <td style="padding-left: 15px;">NIK / No. Identitas</td>
+                            <td>:</td>
+                            <td><t t-esc="doc.surrenderer_id_card or '-'"/></td>
+                        </tr>
+                        <tr>
+                            <td style="padding-left: 15px;">No. Kontak / HP</td>
+                            <td>:</td>
+                            <td><t t-esc="doc.surrenderer_phone or '-'"/></td>
+                        </tr>
+                        <tr>
+                            <td style="padding-left: 15px;">Alamat</td>
+                            <td>:</td>
+                            <td><t t-esc="doc.surrenderer_address or '-'"/></td>
+                        </tr>
+                    </table>
+
+                    <table style="width: 100%; margin-left: 15px; margin-bottom: 20px;">
+                        <tr>
+                            <td style="width: 25%; font-weight: bold;">II. PIHAK PENERIMA</td>
+                            <td style="width: 3%;">:</td>
+                            <td style="width: 72%;"></td>
+                        </tr>
+                        <tr>
+                            <td style="padding-left: 15px;">Nama Petugas</td>
+                            <td>:</td>
+                            <td><strong><t t-esc="doc.receiver_id.name"/></strong></td>
+                        </tr>
+                        <tr>
+                            <td style="padding-left: 15px;">Jabatan / Lembaga</td>
+                            <td>:</td>
+                            <td>Petugas Pelaksana Penerimaan - <t t-esc="doc.company_id.name"/></td>
+                        </tr>
+                    </table>
+
+                    <p>
+                        Dengan ini PIHAK PENYERAH menyerahkan calon penerima manfaat (PPKS) kepada PIHAK PENERIMA untuk mendapatkan asuhan, pelayanan, dan rehabilitasi sosial:
+                    </p>
+
+                    <div style="border: 1px solid #999; padding: 10px; margin-bottom: 15px; background-color: #fafafa;">
+                        <table style="width: 100%; font-size: 12px;">
+                            <tr>
+                                <td style="width: 30%;"><strong>Nama Klien PPKS</strong></td>
+                                <td style="width: 3%;">:</td>
+                                <td style="width: 67%; font-weight: bold; text-transform: uppercase;"><t t-esc="doc.partner_id.name"/></td>
+                            </tr>
+                            <tr>
+                                <td><strong>No. Induk Registrasi</strong></td>
+                                <td>:</td>
+                                <td><t t-esc="doc.registration_number or '-'"/></td>
+                            </tr>
+                            <tr>
+                                <td><strong>NIK KTP</strong></td>
+                                <td>:</td>
+                                <td><t t-esc="doc.partner_id.nik or '-'"/></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Jenis Kelamin / Usia</strong></td>
+                                <td>:</td>
+                                <td><t t-esc="doc.partner_id.gender"/> / <t t-esc="doc.partner_id.age"/> Tahun</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Kategori PPKS</strong></td>
+                                <td>:</td>
+                                <td><t t-esc="doc.ppks_category_id.name or '-'"/></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Status Residensial</strong></td>
+                                <td>:</td>
+                                <td><t t-esc="doc.residential_status"/></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Alasan Penyerahan</strong></td>
+                                <td>:</td>
+                                <td><t t-esc="doc.intake_reason or '-'"/></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Barang yang Dibawa</strong></td>
+                                <td>:</td>
+                                <td><t t-esc="doc.belongings_brought or '-'"/></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <p>
+                        Demikian Berita Acara Serah Terima ini dibuat dengan sebenarnya dalam keadaan sadar dan tanpa paksaan dari pihak manapun untuk dipergunakan sebagaimana mestinya.
+                    </p>
+
+                    <table style="width: 100%; text-align: center; margin-top: 30px;">
+                        <tr>
+                            <td style="width: 33%;">
+                                PIHAK PENYERAH,<br/><br/><br/><br/>
+                                ( <strong><t t-esc="doc.surrenderer_name"/></strong> )
+                            </td>
+                            <td style="width: 33%;">
+                                SAKSI PENYERAHAN,<br/><br/><br/><br/>
+                                ( <strong><t t-esc="doc.witness_name or '________________'"/></strong> )
+                            </td>
+                            <td style="width: 33%;">
+                                PIHAK PENERIMA,<br/><br/><br/><br/>
+                                ( <strong><t t-esc="doc.receiver_id.name"/></strong> )
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" style="padding-top: 25px;">
+                                Mengetahui &amp; Menyetujui,<br/>
+                                <strong>Kepala / Pimpinan Lembaga Kesejahteraan Sosial</strong><br/><br/><br/><br/>
+                                ( ______________________________________ )
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

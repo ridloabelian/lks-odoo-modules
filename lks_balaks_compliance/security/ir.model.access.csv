@@ -1,0 +1,15 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_lks_balaks_standard_caregiver,lks.balaks.standard.caregiver,model_lks_balaks_standard,lks_core.group_lks_caregiver,1,0,0,0
+access_lks_balaks_standard_peksos,lks.balaks.standard.peksos,model_lks_balaks_standard,lks_core.group_lks_social_worker,1,0,0,0
+access_lks_balaks_standard_manager,lks.balaks.standard.manager,model_lks_balaks_standard,lks_core.group_lks_manager,1,1,1,1
+access_lks_balaks_indicator_caregiver,lks.balaks.indicator.caregiver,model_lks_balaks_indicator,lks_core.group_lks_caregiver,1,0,0,0
+access_lks_balaks_indicator_peksos,lks.balaks.indicator.peksos,model_lks_balaks_indicator,lks_core.group_lks_social_worker,1,0,0,0
+access_lks_balaks_indicator_manager,lks.balaks.indicator.manager,model_lks_balaks_indicator,lks_core.group_lks_manager,1,1,1,1
+access_lks_balaks_audit_caregiver,lks.balaks.audit.caregiver,model_lks_balaks_audit,lks_core.group_lks_caregiver,1,0,0,0
+access_lks_balaks_audit_peksos,lks.balaks.audit.peksos,model_lks_balaks_audit,lks_core.group_lks_social_worker,1,1,1,0
+access_lks_balaks_audit_manager,lks.balaks.audit.manager,model_lks_balaks_audit,lks_core.group_lks_manager,1,1,1,1
+access_lks_balaks_audit_line_caregiver,lks.balaks.audit.line.caregiver,model_lks_balaks_audit_line,lks_core.group_lks_caregiver,1,0,0,0
+access_lks_balaks_audit_line_peksos,lks.balaks.audit.line.peksos,model_lks_balaks_audit_line,lks_core.group_lks_social_worker,1,1,1,0
+access_lks_balaks_audit_line_manager,lks.balaks.audit.line.manager,model_lks_balaks_audit_line,lks_core.group_lks_manager,1,1,1,1
+access_lks_siksng_export_wizard_peksos,lks.siksng.export.wizard.peksos,model_lks_siksng_export_wizard,lks_core.group_lks_social_worker,1,1,1,1
+access_lks_siksng_export_wizard_manager,lks.siksng.export.wizard.manager,model_lks_siksng_export_wizard,lks_core.group_lks_manager,1,1,1,1

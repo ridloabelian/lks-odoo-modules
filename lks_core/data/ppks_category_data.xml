@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <!-- ====================================================================== -->
+    <!-- 26 KATEGORI PEMERLU PELAYANAN KESEJAHTERAAN SOSIAL (PPKS) KEMENSOS RI  -->
+    <!-- Berdasarkan Permensos No. 08/2012 & UU No. 11/2009                      -->
+    <!-- ====================================================================== -->
+
+    <!-- KLUSTER 1: ANAK & REMAJA -->
+    <record id="ppks_abt" model="lks.ppks.category">
+        <field name="code">ABT</field>
+        <field name="name">Anak Balita Telantar</field>
+        <field name="cluster">anak</field>
+        <field name="age_group_target">balita</field>
+        <field name="sequence">1</field>
+        <field name="description">Anak berusia 0-4 tahun yang karena sebab tertentu orang tuanya tidak dapat memenuhi kebutuhan dasarnya baik secara jasmani, rohani maupun sosial.</field>
+        <field name="target_services">Pemenuhan ASI/Susu, Asupan Gizi Balita, Layanan Imunisasi, Tempat Tinggal Asuh Pengganti, Kasih Sayang Pengasuh.</field>
+    </record>
+
+    <record id="ppks_at" model="lks.ppks.category">
+        <field name="code">AT</field>
+        <field name="name">Anak Telantar</field>
+        <field name="cluster">anak</field>
+        <field name="age_group_target">anak</field>
+        <field name="sequence">2</field>
+        <field name="description">Anak berusia 5-18 tahun yang karena sebab tertentu orang tuanya tidak dapat memenuhi kebutuhan dasarnya sehingga terhambat pertumbuhan dan perkembangannya secara wajar.</field>
+        <field name="target_services">Asuhan Pengganti Panti, Bantuan Pendidikan Dasar/Menengah (KIP/PIP), Pembinaan Budi Pekerti, Pelatihan Minat Bakat.</field>
+    </record>
+
+    <record id="ppks_abh" model="lks.ppks.category">
+        <field name="code">ABH</field>
+        <field name="name">Anak yang Berhadapan dengan Hukum</field>
+        <field name="cluster">anak</field>
+        <field name="age_group_target">anak</field>
+        <field name="sequence">3</field>
+        <field name="description">Anak yang telah berumur 12 tahun tetapi belum berumur 18 tahun yang diduga melakukan tindak pidana, anak yang menjadi korban tindak pidana, atau anak yang menjadi saksi tindak pidana (UU SPPA No. 11/2012).</field>
+        <field name="target_services">Advokasi Sosial &amp; Bantuan Hukum, Pendampingan Sakti Peksos, Diversi, Rehabilitasi Sosial di LPKS / Shelter Khusus.</field>
+    </record>
+
+    <record id="ppks_aj" model="lks.ppks.category">
+        <field name="code">AJ</field>
+        <field name="name">Anak Jalanan</field>
+        <field name="cluster">anak</field>
+        <field name="age_group_target">anak</field>
+        <field name="sequence">4</field>
+        <field name="description">Anak yang menghabiskan sebagian besar waktunya untuk melakukan kegiatan hidup sehari-hari di jalanan, baik untuk mencari nafkah atau berkeliaran di tempat-tempat umum.</field>
+        <field name="target_services">Rumah Singgah, Pendekatan Outreach Jalanan, Pendidikan Luar Sekolah (Kejar Paket), Pelatihan Vokasional, Bimbingan Keluarga.</field>
+    </record>
+
+    <record id="ppks_adk" model="lks.ppks.category">
+        <field name="code">ADK</field>
+        <field name="name">Anak dengan Kedisabilitasan</field>
+        <field name="cluster">anak</field>
+        <field name="age_group_target">anak</field>
+        <field name="sequence">5</field>
+        <field name="description">Anak yang mengalami keterbatasan fisik, intelektual, mental, dan/atau sensorik dalam jangka waktu lama yang dapat menghambat partisipasi penuh dan efektif dalam kehidupan bermasyarakat.</field>
+        <field name="target_services">Pendidikan Inklusif / SLB, Alat Bantu Disabilitas, Terapi Wicara/Fisioterapi, Dukungan Pengasuhan Keluarga (Family Support).</field>
+    </record>
+
+    <record id="ppks_aktk" model="lks.ppks.category">
+        <field name="code">AKTK</field>
+        <field name="name">Anak Korban Tindak Kekerasan</field>
+        <field name="cluster">anak</field>
+        <field name="age_group_target">anak</field>
+        <field name="sequence">6</field>
+        <field name="description">Anak yang mengalami perlakuan salah, penelantaran, eksploitasi fisik maupun seksual, atau perlakuan kejam lainnya.</field>
+        <field name="target_services">Trauma Healing / Konseling Psikologis, Perlindungan Saksi dan Korban, Safe House / Rumah Aman, Reintegrasi Sosial.</field>
+    </record>
+
+    <record id="ppks_ampk" model="lks.ppks.category">
+        <field name="code">AMPK</field>
+        <field name="name">Anak yang Memerlukan Perlindungan Khusus</field>
+        <field name="cluster">anak</field>
+        <field name="age_group_target">anak</field>
+        <field name="sequence">7</field>
+        <field name="description">Anak dalam situasi darurat, anak korban pornografi, anak dengan HIV/AIDS, anak korban penculikan, penjualan, dan/atau perdagangan anak.</field>
+        <field name="target_services">Perlindungan Hukum, Pelayanan Kesehatan Khusus, Bimbingan Psikosial Lanjutan, Penempatan di Lembaga Pengasuhan Berizin.</field>
+    </record>
+
+    <!-- KLUSTER 2: LANJUT USIA -->
+    <record id="ppks_lut" model="lks.ppks.category">
+        <field name="code">LUT</field>
+        <field name="name">Lanjut Usia Telantar</field>
+        <field name="cluster">lansia</field>
+        <field name="age_group_target">lansia</field>
+        <field name="sequence">8</field>
+        <field name="description">Seseorang yang berusia 60 tahun atau lebih, karena faktor-faktor tertentu tidak dapat memenuhi kebutuhan dasarnya baik jasmani, rohani maupun sosial, sebatang kara dan tidak memiliki keluarga penanggung jawab.</field>
+        <field name="target_services">Permakanan Lansia 3x Sehari, Pelayanan Day Care / Residensial Panti Wreda, Bimbingan Kesehatan Geriatri, Perawatan Paliatif.</field>
+    </record>
+
+    <!-- KLUSTER 3: PENYANDANG DISABILITAS -->
+    <record id="ppks_dis_fisik" model="lks.ppks.category">
+        <field name="code">DIS-FISIK</field>
+        <field name="name">Penyandang Disabilitas Fisik</field>
+        <field name="cluster">disabilitas</field>
+        <field name="age_group_target">all</field>
+        <field name="sequence">9</field>
+        <field name="description">Terganggunya fungsi gerak, antara lain lumpuh layu atau kaku, paraplegi, celebral palsy (CP), akibat amputasi, kusta, dan lain-lain.</field>
+        <field name="target_services">Fisioterapi, Bantuan Alat Bantu Kaki/Tangan Palsu, Kursi Roda, Aksesibilitas Lingkungan Ramah Disabilitas, Pelatihan Kerja.</field>
+    </record>
+
+    <record id="ppks_dis_netra" model="lks.ppks.category">
+        <field name="code">DIS-NETRA</field>
+        <field name="name">Penyandang Disabilitas Sensorik Netra</field>
+        <field name="cluster">disabilitas</field>
+        <field name="age_group_target">all</field>
+        <field name="sequence">10</field>
+        <field name="description">Terganggunya fungsi penglihatan, antara lain buta total (total blind) atau kurang awas (low vision).</field>
+        <field name="target_services">Pelatihan Orientasi &amp; Mobilitas (Tongkat Putih), Literasi Braille, Komputer Bicara (Screen Reader), Keterampilan Massage/Pijat.</field>
+    </record>
+
+    <record id="ppks_dis_rungu" model="lks.ppks.category">
+        <field name="code">DIS-RUNGI</field>
+        <field name="name">Penyandang Disabilitas Sensorik Rungu Wicara</field>
+        <field name="cluster">disabilitas</field>
+        <field name="age_group_target">all</field>
+        <field name="sequence">11</field>
+        <field name="description">Terganggunya fungsi pendengaran dan/atau kemampuan berbicara, baik tuli bawaan atau didapat.</field>
+        <field name="target_services">Alat Bantu Dengar (ABD), Terapi Wicara, Bahasa Isyarat (BISINDO), Keterampilan Desain Grafis, Menjahit, dan Kriya.</field>
+    </record>
+
+    <record id="ppks_dis_intelektual" model="lks.ppks.category">
+        <field name="code">DIS-GRAHITA</field>
+        <field name="name">Penyandang Disabilitas Intelektual</field>
+        <field name="cluster">disabilitas</field>
+        <field name="age_group_target">all</field>
+        <field name="sequence">12</field>
+        <field name="description">Terganggunya fungsi pikir karena tingkat kecerdasan di bawah rata-rata (Down Syndrome, lambat belajar, tuna grahita).</field>
+        <field name="target_services">Bina Diri (ADL - Activities of Daily Living), Terapi Okupasi, Pembiasaan Kemandirian Dasar, Pelatihan Sederhana Berulang.</field>
+    </record>
+
+    <record id="ppks_dis_mental" model="lks.ppks.category">
+        <field name="code">DIS-MENTAL</field>
+        <field name="name">Penyandang Disabilitas Mental / Eks-Psikotik</field>
+        <field name="cluster">disabilitas</field>
+        <field name="age_group_target">dewasa</field>
+        <field name="sequence">13</field>
+        <field name="description">Terganggunya fungsi pikir, emosi, dan perilaku (skizofrenia, bipolar, depresi berat, retardasi psikososial).</field>
+        <field name="target_services">Bebas Pasung, Pendampingan Psikiater / Obat Teratur, Rehabilitasi Sosial Berbasis Komunitas, Resosialisasi ke Masyarakat.</field>
+    </record>
+
+    <record id="ppks_dis_ganda" model="lks.ppks.category">
+        <field name="code">DIS-GANDA</field>
+        <field name="name">Penyandang Disabilitas Ganda / Multipel</field>
+        <field name="cluster">disabilitas</field>
+        <field name="age_group_target">all</field>
+        <field name="sequence">14</field>
+        <field name="description">Penyandang disabilitas yang mempunyai dua atau lebih ragam kedisabilitasan (misal: disabilitas fisik dan sensorik netra sekaligus).</field>
+        <field name="target_services">Perawatan Penuh (Total Care), Bantuan Pengasuhan Khusus, Terapi Terpadu, Layanan Residensial Panti Disabilitas.</field>
+    </record>
+
+    <!-- KLUSTER 4: TUNA SOSIAL & KORBAN NAPZA -->
+    <record id="ppks_gelandangan" model="lks.ppks.category">
+        <field name="code">GELANDANG</field>
+        <field name="name">Tuna Sosial / Gelandangan</field>
+        <field name="cluster">tunasosial</field>
+        <field name="age_group_target">dewasa</field>
+        <field name="sequence">15</field>
+        <field name="description">Orang-orang yang hidup dalam keadaan tidak sesuai dengan norma kehidupan yang layak dalam masyarakat setempat, tidak mempunyai tempat tinggal dan pekerjaan yang tetap.</field>
+        <field name="target_services">Penampungan Sementara (Shelter), Pembuatan KTP/NIK, Bimbingan Mental Sosial, Pelatihan Kerja, Penyaluran Kerja Mandiri.</field>
+    </record>
+
+    <record id="ppks_pengemis" model="lks.ppks.category">
+        <field name="code">PENGEMIS</field>
+        <field name="name">Pengemis</field>
+        <field name="cluster">tunasosial</field>
+        <field name="age_group_target">all</field>
+        <field name="sequence">16</field>
+        <field name="description">Orang-orang yang mendapatkan penghasilan dengan meminta-minta di muka umum dengan berbagai cara dan alasan untuk mengharapkan belas kasihan orang lain.</field>
+        <field name="target_services">Pembinaan Motivasi Kemandirian, Bantuan Modal Usaha Produktif, Penjangkauan dan Pemulangan ke Daerah Asal.</field>
+    </record>
+
+    <record id="ppks_pemulung" model="lks.ppks.category">
+        <field name="code">PEMULUNG</field>
+        <field name="name">Pemulung</field>
+        <field name="cluster">tunasosial</field>
+        <field name="age_group_target">all</field>
+        <field name="sequence">17</field>
+        <field name="description">Orang-orang yang melakukan pekerjaan mengumpulkan barang-barang bekas yang dibuang untuk dijual kembali demi mencukupi kebutuhan hidupnya.</field>
+        <field name="target_services">Bantuan Sarana Usaha (Gerobak/Sepeda), Sanitasi &amp; Kesehatan Diri, Pendidikan Anak Pemulung, Jaminan Sosial KIS.</field>
+    </record>
+
+    <record id="ppks_minoritas" model="lks.ppks.category">
+        <field name="code">MINORITAS</field>
+        <field name="name">Kelompok Minoritas Sosial</field>
+        <field name="cluster">tunasosial</field>
+        <field name="age_group_target">dewasa</field>
+        <field name="sequence">18</field>
+        <field name="description">Kelompok masyarakat tertentu yang mengalami stigmatisasi, pengucilan, atau diskriminasi sosial budaya.</field>
+        <field name="target_services">Advokasi Hak Sipil (KTP/KK), Bimbingan Penerimaan Sosial, Bantuan Kewirausahaan Mandiri.</field>
+    </record>
+
+    <record id="ppks_bwbp" model="lks.ppks.category">
+        <field name="code">BWBP</field>
+        <field name="name">Bekas Warga Binaan Pemasyarakatan (BWBP)</field>
+        <field name="cluster">tunasosial</field>
+        <field name="age_group_target">dewasa</field>
+        <field name="sequence">19</field>
+        <field name="description">Seseorang yang telah selesai menjalani masa pidananya di Lembaga Pemasyarakatan dan mengalami hambatan untuk berintegrasi kembali dalam kehidupan masyarakat.</field>
+        <field name="target_services">Bimbingan Mental &amp; Resosialisasi, Pelatihan Vokasional, Bantuan Modal Usaha Awal, Pendampingan Anti-Residivis.</field>
+    </record>
+
+    <record id="ppks_odha" model="lks.ppks.category">
+        <field name="code">ODHA</field>
+        <field name="name">Orang dengan HIV/AIDS (ODHA)</field>
+        <field name="cluster">tunasosial</field>
+        <field name="age_group_target">all</field>
+        <field name="sequence">20</field>
+        <field name="description">Seseorang yang telah terinfeksi Human Immunodeficiency Virus (HIV) dan/atau telah masuk dalam fase AIDS serta mengalami diskriminasi sosial.</field>
+        <field name="target_services">Dukungan Pengobatan ARV Rutin, Pendampingan Kelompok Dukungan Sebaya (KDS), Nutrisi Tambahan, Perlindungan Anti-Stigma.</field>
+    </record>
+
+    <record id="ppks_napza" model="lks.ppks.category">
+        <field name="code">NAPZA</field>
+        <field name="name">Korban Penyalahgunaan NAPZA</field>
+        <field name="cluster">tunasosial</field>
+        <field name="age_group_target">all</field>
+        <field name="sequence">21</field>
+        <field name="description">Seseorang yang menggunakan narkotika, psikotropika, dan zat adiktif lainnya di luar kepentingan pengobatan atau tanpa pengawasan dokter.</field>
+        <field name="target_services">Rehabilitasi Sosial Therapeutic Community (TC), Detoksifikasi Medis, Konseling Konselor Adiksi, Program Pascarehabilitasi.</field>
+    </record>
+
+    <!-- KLUSTER 5: KORBAN KEKERASAN, TPPO & BENCANA -->
+    <record id="ppks_tppo" model="lks.ppks.category">
+        <field name="code">TPPO</field>
+        <field name="name">Korban Perdagangan Orang (Trafficking)</field>
+        <field name="cluster">korban</field>
+        <field name="age_group_target">all</field>
+        <field name="sequence">22</field>
+        <field name="description">Seseorang yang mengalami penderitaan psikis, mental, fisik, seksual, dan/atau sosial yang diakibatkan tindak pidana perdagangan orang.</field>
+        <field name="target_services">Rumah Perlindungan Sosial Trauma Center (RPTC), Pemulihan Trauma, Pemulangan ke Daerah Asal, Bantuan Reintegrasi.</field>
+    </record>
+
+    <record id="ppks_ktk" model="lks.ppks.category">
+        <field name="code">KTK</field>
+        <field name="name">Korban Tindak Kekerasan (KTK)</field>
+        <field name="cluster">korban</field>
+        <field name="age_group_target">all</field>
+        <field name="sequence">23</field>
+        <field name="description">Orang yang mengalami kekerasan dalam rumah tangga (KDRT) atau kekerasan di luar rumah tangga yang menimbulkan penderitaan fisik, seksual, atau psikologis.</field>
+        <field name="target_services">Shelter Darurat, Layanan Visum &amp; Pengobatan, Konseling Psikososial, Mediasi Keluarga / Bantuan Hukum.</field>
+    </record>
+
+    <record id="ppks_pmbs" model="lks.ppks.category">
+        <field name="code">PMBS</field>
+        <field name="name">Pekerja Migran Bermasalah Sosial (PMBS)</field>
+        <field name="cluster">korban</field>
+        <field name="age_group_target">dewasa</field>
+        <field name="sequence">24</field>
+        <field name="description">Pekerja migran Indonesia di luar negeri yang mengalami penipuan, penelantaran, kekerasan, deportasi, atau pemutusan hubungan kerja sepihak tanpa hak.</field>
+        <field name="target_services">Layanan Transit RPTC, Pemulangan ke Kampung Halaman, Bantuan Pemeriksaan Kesehatan, Program Pemberdayaan Ekonomi.</field>
+    </record>
+
+    <record id="ppks_bencana_alam" model="lks.ppks.category">
+        <field name="code">BENC-ALAM</field>
+        <field name="name">Korban Bencana Alam</field>
+        <field name="cluster">korban</field>
+        <field name="age_group_target">all</field>
+        <field name="sequence">25</field>
+        <field name="description">Orang atau sekelompok orang yang mengalami penderitaan dan kehilangan tempat tinggal atau mata pencaharian akibat gempa bumi, banjir, longsor, letusan gunung api, dll.</field>
+        <field name="target_services">Dapur Umum Lapangan, Huntara (Hunian Sementara), Dukungan Psikososial Anak &amp; Lansia di Pengungsian, Bantuan Logistik Dasar.</field>
+    </record>
+
+    <record id="ppks_bencana_sosial" model="lks.ppks.category">
+        <field name="code">BENC-SOSIAL</field>
+        <field name="name">Korban Bencana Sosial / Pengungsi</field>
+        <field name="cluster">korban</field>
+        <field name="age_group_target">all</field>
+        <field name="sequence">26</field>
+        <field name="description">Orang atau sekelompok orang yang mengalami penderitaan dan pengungsian akibat konflik sosial antarkelompok atau kerusuhan sosial.</field>
+        <field name="target_services">Perlindungan Tempat Tinggal Sementara, Rekonsiliasi &amp; Mediasi Sosial, Bantuan Permakanan, Pemulihan Trauma Sosial.</field>
+    </record>
+
+    <!-- KATEGORI KOMPLEMENTER KEMENSOS -->
+    <record id="ppks_kbsp" model="lks.ppks.category">
+        <field name="code">KBSP</field>
+        <field name="name">Keluarga Bermasalah Sosial Psikologis (KBSP) / Fakir Miskin</field>
+        <field name="cluster">keluarga</field>
+        <field name="age_group_target">all</field>
+        <field name="sequence">27</field>
+        <field name="description">Keluarga yang memiliki hubungan perkawinan tidak harmonis, ketidakmampuan memenuhi kebutuhan dasar karena kemiskinan ekstrem, atau mengalami disfungsi keluarga.</field>
+        <field name="target_services">Konseling Ketahanan Keluarga, Bantuan Asistensi Rehabilitasi Sosial (ATENSI), Bantuan Usaha Ekonomi Produktif (UEP).</field>
+    </record>
+</odoo>

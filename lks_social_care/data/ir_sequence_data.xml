@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <!-- Sequence: Rencana Intervensi Layanan (Case Plan) -->
+    <record id="seq_lks_case_plan" model="ir.sequence">
+        <field name="name">Rencana Intervensi Layanan Individual</field>
+        <field name="code">lks.case.plan</field>
+        <field name="prefix">CP/%(year)s/%(month)s/</field>
+        <field name="padding">4</field>
+        <field name="company_id" eval="False"/>
+    </record>
+
+    <!-- Sequence: Berita Acara Terminasi & Reuni -->
+    <record id="seq_lks_case_termination" model="ir.sequence">
+        <field name="name">Berita Acara Terminasi &amp; Reuni PPKS</field>
+        <field name="code">lks.case.termination</field>
+        <field name="prefix">TERM/%(year)s/%(month)s/</field>
+        <field name="padding">4</field>
+        <field name="company_id" eval="False"/>
+    </record>
+</odoo>

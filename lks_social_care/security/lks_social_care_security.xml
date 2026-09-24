@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Multi-company Rules for Social Care Models -->
+    <record id="rule_lks_education_record_company" model="ir.rule">
+        <field name="name">LKS Education Record Multi-Company</field>
+        <field name="model_id" ref="model_lks_education_record"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="rule_lks_medical_record_company" model="ir.rule">
+        <field name="name">LKS Medical Record Multi-Company</field>
+        <field name="model_id" ref="model_lks_medical_record"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="rule_lks_case_plan_company" model="ir.rule">
+        <field name="name">LKS Case Plan Multi-Company</field>
+        <field name="model_id" ref="model_lks_case_plan"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="rule_lks_case_termination_company" model="ir.rule">
+        <field name="name">LKS Case Termination Multi-Company</field>
+        <field name="model_id" ref="model_lks_case_termination"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+</odoo>

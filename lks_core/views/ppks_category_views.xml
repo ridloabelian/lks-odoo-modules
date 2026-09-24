@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_lks_ppks_category_tree" model="ir.ui.view">
+        <field name="name">lks.ppks.category.tree</field>
+        <field name="model">lks.ppks.category</field>
+        <field name="arch" type="xml">
+            <list string="Kategori PPKS Kemensos" default_order="sequence, code">
+                <field name="sequence" widget="handle"/>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="cluster" widget="badge"
+                       decoration-info="cluster == 'anak'"
+                       decoration-warning="cluster == 'lansia'"
+                       decoration-success="cluster == 'disabilitas'"
+                       decoration-danger="cluster == 'korban'"
+                       decoration-muted="cluster in ['tunasosial', 'keluarga']"/>
+                <field name="age_group_target"/>
+                <field name="client_count"/>
+                <field name="legal_basis"/>
+                <field name="active" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_lks_ppks_category_form" model="ir.ui.view">
+        <field name="name">lks.ppks.category.form</field>
+        <field name="model">lks.ppks.category</field>
+        <field name="arch" type="xml">
+            <form string="Kategori PPKS Kemensos">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" type="action" name="%(lks_core.action_lks_ppks_clients)d"
+                                icon="fa-users" context="{'search_default_ppks_category_id': id}">
+                            <field name="client_count" widget="statinfo" string="Klien Terdaftar"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name" string="Nama Kategori PPKS"/>
+                        <h1>
+                            <field name="name" placeholder="misal: Anak Telantar / Lanjut Usia Telantar"/>
+                        </h1>
+                        <h3>
+                            <field name="code" placeholder="Kode (misal: AT, LUT, ABH)"/>
+                        </h3>
+                    </div>
+                    <group>
+                        <group name="meta">
+                            <field name="cluster"/>
+                            <field name="age_group_target"/>
+                            <field name="sequence"/>
+                        </group>
+                        <group name="legal">
+                            <field name="legal_basis"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Definisi &amp; Kriteria Kemensos" name="description">
+                            <field name="description" placeholder="Penjelasan kriteria resmi pemerlu pelayanan kesejahteraan sosial sesuai petunjuk teknis Kemensos..."/>
+                        </page>
+                        <page string="Standar Pelayanan Minimal (SPM)" name="services">
+                            <field name="target_services" placeholder="Rincian bentuk layanan minimal yang wajib diberikan (permakanan, bimbingan fisik, asuhan, dll.)..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_lks_ppks_category_search" model="ir.ui.view">
+        <field name="name">lks.ppks.category.search</field>
+        <field name="model">lks.ppks.category</field>
+        <field name="arch" type="xml">
+            <search string="Pencarian Kategori PPKS">
+                <field name="name" filter_domain="['|', ('name', 'ilike', self), ('code', 'ilike', self)]"/>
+                <field name="code"/>
+                <separator/>
+                <filter string="Kluster Anak" name="cluster_anak" domain="[('cluster', '=', 'anak')]"/>
+                <filter string="Kluster Lansia" name="cluster_lansia" domain="[('cluster', '=', 'lansia')]"/>
+                <filter string="Kluster Disabilitas" name="cluster_disabilitas" domain="[('cluster', '=', 'disabilitas')]"/>
+                <filter string="Kluster Tuna Sosial" name="cluster_tunasosial" domain="[('cluster', '=', 'tunasosial')]"/>
+                <filter string="Kluster Korban Kekerasan/Bencana" name="cluster_korban" domain="[('cluster', '=', 'korban')]"/>
+                <separator/>
+                <filter string="Diarsipkan" name="archived" domain="[('active', '=', False)]"/>
+                <group expand="0" string="Kelompokkan Berdasarkan">
+                    <filter string="Kluster PPKS" name="group_by_cluster" context="{'group_by': 'cluster'}"/>
+                    <filter string="Sasaran Usia" name="group_by_age" context="{'group_by': 'age_group_target'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_lks_ppks_category" model="ir.actions.act_window">
+        <field name="name">26 Kategori PPKS Kemensos</field>
+        <field name="res_model">lks.ppks.category</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_lks_ppks_category_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Daftar 26 Kategori Pemerlu Pelayanan Kesejahteraan Sosial (PPKS) Kemensos RI.
+            </p>
+        </field>
+    </record>
+</odoo>

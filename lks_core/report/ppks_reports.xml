@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Report Action: Kartu Identitas PPKS Panti -->
+    <record id="action_report_ppks_card" model="ir.actions.report">
+        <field name="name">Kartu Identitas Klien PPKS</field>
+        <field name="model">res.partner</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">lks_core.report_ppks_card_template</field>
+        <field name="report_file">lks_core.report_ppks_card_template</field>
+        <field name="print_report_name">'Kartu_PPKS_' + (object.registration_number or object.name)</field>
+        <field name="binding_model_id" ref="base.model_res_partner"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <!-- Report Action: Lembar Buku Induk Klien PPKS Standar Kemensos -->
+    <record id="action_report_buku_induk_client" model="ir.actions.report">
+        <field name="name">Buku Induk Registrasi Klien Kemensos</field>
+        <field name="model">res.partner</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">lks_core.report_buku_induk_template</field>
+        <field name="report_file">lks_core.report_buku_induk_template</field>
+        <field name="print_report_name">'Buku_Induk_' + (object.registration_number or object.name)</field>
+        <field name="binding_model_id" ref="base.model_res_partner"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <!-- Report Action: Berita Acara Penerimaan Klien (BAST Masuk) -->
+    <record id="action_report_admission_bast" model="ir.actions.report">
+        <field name="name">Berita Acara Penerimaan Klien (BAST Masuk)</field>
+        <field name="model">lks.admission.register</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">lks_core.report_admission_bast_template</field>
+        <field name="report_file">lks_core.report_admission_bast_template</field>
+        <field name="print_report_name">'BAST_Penerimaan_' + (object.name.replace('/', '_'))</field>
+        <field name="binding_model_id" ref="model_lks_admission_register"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

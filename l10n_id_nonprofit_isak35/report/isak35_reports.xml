@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_isak35_financial" model="ir.actions.report">
+        <field name="name">Laporan Keuangan Nonlaba (ISAK 35)</field>
+        <field name="model">isak35.financial.report.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">l10n_id_nonprofit_isak35.report_isak35_financial_template</field>
+        <field name="report_file">l10n_id_nonprofit_isak35.report_isak35_financial_template</field>
+        <field name="print_report_name">'Laporan_Keuangan_ISAK35_' + (object.company_id.name)</field>
+        <field name="binding_model_id" ref="model_isak35_financial_report_wizard"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

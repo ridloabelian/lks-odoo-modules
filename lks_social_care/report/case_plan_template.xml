@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_case_plan_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <div class="article page" style="font-family: 'Times New Roman', Times, serif; font-size: 13px; line-height: 1.5; color: #111;">
+                    <!-- Kop Surat -->
+                    <div style="text-align: center; border-bottom: 3px double #000; padding-bottom: 10px; margin-bottom: 20px;">
+                        <div style="font-size: 16px; font-weight: bold; text-transform: uppercase;">
+                            <t t-esc="doc.company_id.name"/>
+                        </div>
+                        <div style="font-size: 13px; font-weight: bold;">
+                            PROGRAM ASISTENSI REHABILITASI &amp; ASUHAN SOSIAL KEMENSOS RI
+                        </div>
+                        <div style="font-size: 11px;">
+                            Alamat: <t t-esc="doc.company_id.street"/>, <t t-esc="doc.company_id.city"/> | Telp: <t t-esc="doc.company_id.phone"/>
+                        </div>
+                    </div>
+
+                    <!-- Judul -->
+                    <div style="text-align: center; margin-bottom: 20px;">
+                        <h4 style="margin: 0; font-weight: bold; text-decoration: underline; text-transform: uppercase;">
+                            RENCANA INTERVENSI LAYANAN INDIVIDUAL (CASE PLAN)
+                        </h4>
+                        <div style="font-size: 12px; margin-top: 5px;">
+                            Nomor Dokumen: <strong><t t-esc="doc.name"/></strong>
+                        </div>
+                    </div>
+
+                    <!-- Data Klien -->
+                    <table style="width: 100%; border-collapse: collapse; margin-bottom: 15px;">
+                        <tr>
+                            <td style="width: 25%; font-weight: bold;">Nama Klien PPKS</td>
+                            <td style="width: 3%;">:</td>
+                            <td style="width: 35%; font-weight: bold; text-transform: uppercase;"><t t-esc="doc.partner_id.name"/></td>
+                            <td style="width: 20%; font-weight: bold;">Tanggal Penyusunan</td>
+                            <td style="width: 2%;">:</td>
+                            <td style="width: 15%;"><t t-if="doc.plan_date" t-esc="doc.plan_date.strftime('%d/%m/%Y')"/></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold;">No. Induk PPKS</td>
+                            <td>:</td>
+                            <td><t t-esc="doc.registration_number or '-'"/></td>
+                            <td style="font-weight: bold;">Target Selesai</td>
+                            <td>:</td>
+                            <td><t t-if="doc.target_completion_date" t-esc="doc.target_completion_date.strftime('%d/%m/%Y')"/></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold;">Kategori PPKS</td>
+                            <td>:</td>
+                            <td><t t-esc="doc.ppks_category_id.name or '-'"/></td>
+                            <td style="font-weight: bold;">Status Case Plan</td>
+                            <td>:</td>
+                            <td><t t-esc="doc.state"/></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold;">Pekerja Sosial</td>
+                            <td>:</td>
+                            <td colspan="4"><strong><t t-esc="doc.social_worker_id.name"/></strong></td>
+                        </tr>
+                    </table>
+
+                    <!-- Rincian Masalah & Sasaran -->
+                    <div style="background-color: #f3f4f6; font-weight: bold; padding: 4px 8px; border: 1px solid #ccc; margin-top: 10px;">
+                        I. IDENTIFIKASI MASALAH &amp; SASARAN INTERVENSI
+                    </div>
+                    <div style="border: 1px solid #ccc; border-top: none; padding: 10px; margin-bottom: 15px;">
+                        <p><strong>Identifikasi Masalah &amp; Kebutuhan:</strong><br/>
+                        <t t-esc="doc.problem_identification or '-'"/></p>
+                        <p><strong>Kekuatan &amp; Potensi Klien:</strong><br/>
+                        <t t-esc="doc.client_strengths or '-'"/></p>
+                        <p><strong>Tujuan Jangka Pendek (1-3 Bulan):</strong><br/>
+                        <t t-esc="doc.short_term_goals or '-'"/></p>
+                        <p><strong>Tujuan Jangka Panjang (Terminasi/Kemandirian):</strong><br/>
+                        <t t-esc="doc.long_term_goals or '-'"/></p>
+                    </div>
+
+                    <!-- 4 Pilar Intervensi -->
+                    <div style="background-color: #f3f4f6; font-weight: bold; padding: 4px 8px; border: 1px solid #ccc;">
+                        II. STRATEGI PELAYANAN &amp; INTERVENSI SOSIAL (4 PILAR)
+                    </div>
+                    <div style="border: 1px solid #ccc; border-top: none; padding: 10px; margin-bottom: 15px;">
+                        <p><strong>1. Bimbingan Fisik &amp; Kesehatan:</strong><br/>
+                        <t t-esc="doc.physical_guidance or '-'"/></p>
+                        <p><strong>2. Bimbingan Mental &amp; Spiritual:</strong><br/>
+                        <t t-esc="doc.mental_spiritual_guidance or '-'"/></p>
+                        <p><strong>3. Bimbingan Sosial &amp; Psikologis:</strong><br/>
+                        <t t-esc="doc.social_guidance or '-'"/></p>
+                        <p><strong>4. Pelatihan Vokasional &amp; Keterampilan Hidup:</strong><br/>
+                        <t t-esc="doc.vocational_training or '-'"/></p>
+                    </div>
+
+                    <!-- Evaluasi & Tanda Tangan -->
+                    <div style="background-color: #f3f4f6; font-weight: bold; padding: 4px 8px; border: 1px solid #ccc;">
+                        III. HASIL EVALUASI &amp; PERKEMBANGAN
+                    </div>
+                    <div style="border: 1px solid #ccc; border-top: none; padding: 10px; margin-bottom: 25px;">
+                        <p><strong>Indikator Keberhasilan:</strong><br/>
+                        <t t-esc="doc.success_indicators or '-'"/></p>
+                        <p><strong>Catatan Perkembangan Terkini:</strong><br/>
+                        <t t-esc="doc.progress_evaluation or 'Dalam proses pelaksanaan...'"/></p>
+                    </div>
+
+                    <table style="width: 100%; text-align: center;">
+                        <tr>
+                            <td style="width: 50%;">
+                                Disetujui Oleh,<br/>
+                                <strong>Kepala / Pimpinan LKS</strong><br/><br/><br/><br/>
+                                ( ______________________________ )
+                            </td>
+                            <td style="width: 50%;">
+                                Disusun Oleh,<br/>
+                                <strong>Pekerja Sosial Pendamping</strong><br/><br/><br/><br/>
+                                ( <strong><t t-esc="doc.social_worker_id.name"/></strong> )
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

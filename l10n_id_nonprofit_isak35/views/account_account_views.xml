@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_account_form_isak35_inherit" model="ir.ui.view">
+        <field name="name">account.account.form.isak35.inherit</field>
+        <field name="model">account.account</field>
+        <field name="inherit_id" ref="account.view_account_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group" position="inside">
+                <group string="Standar Akuntansi Nonlaba (ISAK 35)">
+                    <field name="isak35_group"/>
+                    <field name="isak35_cash_flow_category"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_account_list_isak35_inherit" model="ir.ui.view">
+        <field name="name">account.account.list.isak35.inherit</field>
+        <field name="model">account.account</field>
+        <field name="inherit_id" ref="account.view_account_list"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='account_type']" position="after">
+                <field name="isak35_group" optional="show" widget="badge"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

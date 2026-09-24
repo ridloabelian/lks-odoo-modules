@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_isak35_financial_report_wizard_form" model="ir.ui.view">
+        <field name="name">isak35.financial.report.wizard.form</field>
+        <field name="model">isak35.financial.report.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Laporan Keuangan Entitas Nonlaba (ISAK 35)">
+                <sheet>
+                    <div class="alert alert-info text-center" role="alert">
+                        <strong>Standar Pelaporan Keuangan Organisasi Nonlaba / Yayasan Sosial (ISAK 35 - IAI)</strong><br/>
+                        Mencakup Laporan Posisi Keuangan, Penghasilan Komprehensif (Aktivitas), Perubahan Aset Neto, dan Arus Kas.
+                    </div>
+                    <group>
+                        <group string="Parameter Periode Laporan">
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                        <group string="Format &amp; Cakupan">
+                            <field name="report_type"/>
+                            <field name="target_move" widget="radio"/>
+                        </group>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_print_pdf" string="Cetak Laporan Keuangan PDF (ISAK 35)" type="object"
+                            class="oe_highlight" icon="fa-print"/>
+                    <button string="Batal" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_isak35_financial_report_wizard" model="ir.actions.act_window">
+        <field name="name">Laporan Keuangan Nonlaba (ISAK 35)</field>
+        <field name="res_model">isak35.financial.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

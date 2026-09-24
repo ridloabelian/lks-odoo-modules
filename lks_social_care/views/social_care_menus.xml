@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Submenu: Case Management & Asuhan Sosial -->
+    <menuitem id="menu_lks_case_management_main"
+              name="Case Management"
+              parent="lks_core.menu_lks_root"
+              sequence="15"/>
+
+    <menuitem id="menu_lks_case_plan"
+              name="Rencana Intervensi (Case Plan)"
+              parent="menu_lks_case_management_main"
+              action="action_lks_case_plan"
+              sequence="10"/>
+
+    <menuitem id="menu_lks_case_termination"
+              name="Terminasi &amp; Reuni Keluarga"
+              parent="menu_lks_case_management_main"
+              action="action_lks_case_termination"
+              sequence="20"/>
+
+    <!-- Submenu: Pendidikan Klien -->
+    <menuitem id="menu_lks_education_main"
+              name="Pendidikan Klien"
+              parent="lks_core.menu_lks_root"
+              sequence="25"/>
+
+    <menuitem id="menu_lks_education_record"
+              name="Data Sekolah &amp; Siswa"
+              parent="menu_lks_education_main"
+              action="action_lks_education_record"
+              sequence="10"/>
+
+    <!-- Submenu: Kesehatan & Medis -->
+    <menuitem id="menu_lks_health_main"
+              name="Kesehatan &amp; Medis"
+              parent="lks_core.menu_lks_root"
+              sequence="30"/>
+
+    <menuitem id="menu_lks_medical_record"
+              name="Rekam Medis Klien"
+              parent="menu_lks_health_main"
+              action="action_lks_medical_record"
+              sequence="10"/>
+
+    <menuitem id="menu_lks_medical_visit"
+              name="Kunjungan &amp; Berobat"
+              parent="menu_lks_health_main"
+              action="action_lks_medical_visit"
+              sequence="20"/>
+</odoo>

@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ====================================================================== -->
+    <!-- CASE PLAN (RENCANA INTERVENSI) VIEWS                                  -->
+    <!-- ====================================================================== -->
+    <record id="view_lks_case_plan_tree" model="ir.ui.view">
+        <field name="name">lks.case.plan.tree</field>
+        <field name="model">lks.case.plan</field>
+        <field name="arch" type="xml">
+            <list string="Rencana Intervensi Layanan (Case Plan)" default_order="plan_date desc, id desc">
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="registration_number"/>
+                <field name="ppks_category_id"/>
+                <field name="social_worker_id"/>
+                <field name="plan_date"/>
+                <field name="target_completion_date"/>
+                <field name="review_period"/>
+                <field name="state" widget="badge"
+                       decoration-info="state == 'draft'"
+                       decoration-warning="state in ['approved', 'ongoing']"
+                       decoration-success="state in ['evaluated', 'closed']"
+                       decoration-danger="state == 'cancel'"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_lks_case_plan_form" model="ir.ui.view">
+        <field name="name">lks.case.plan.form</field>
+        <field name="model">lks.case.plan</field>
+        <field name="arch" type="xml">
+            <form string="Rencana Intervensi Layanan Individual">
+                <header>
+                    <button name="action_approve" string="Setujui Case Plan" type="object"
+                            class="oe_highlight" invisible="state != 'draft'"/>
+                    <button name="action_start_intervention" string="Mulai Pelaksanaan Intervensi" type="object"
+                            class="oe_highlight" invisible="state != 'approved'"/>
+                    <button name="action_evaluate" string="Selesai Evaluasi Capaian" type="object"
+                            class="oe_highlight" invisible="state != 'ongoing'"/>
+                    <button name="action_close" string="Tutup / Selesaikan Case Plan" type="object"
+                            invisible="state != 'evaluated'"/>
+                    <button name="action_cancel" string="Batalkan" type="object"
+                            invisible="state in ['cancel', 'closed']"/>
+                    <button name="action_set_to_draft" string="Kembalikan ke Draft" type="object"
+                            invisible="state != 'cancel'"/>
+
+                    <button name="action_create_npo_assessment" string="Asesmen Kemiskinan (NPO)" type="object"
+                            icon="fa-clipboard" class="btn btn-outline-primary"/>
+                    <button name="action_create_disbursement_request" string="Ajukan Bantuan / Manfaat" type="object"
+                            icon="fa-money" class="btn btn-outline-success"/>
+
+                    <field name="state" widget="statusbar" statusbar_visible="draft,approved,ongoing,evaluated,closed"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" type="object" name="action_view_disbursements"
+                                icon="fa-gift">
+                            <field name="disbursement_request_count" widget="statinfo" string="Penyaluran Bantuan"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name" string="Nomor Dokumen Rencana Layanan"/>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                        <h3>
+                            <field name="partner_id" options="{'no_create': True}" placeholder="Pilih Klien PPKS"/>
+                        </h3>
+                    </div>
+                    <group>
+                        <group string="Data Klien &amp; Pendamping">
+                            <field name="registration_number"/>
+                            <field name="ppks_category_id"/>
+                            <field name="social_worker_id"/>
+                            <field name="assessment_id" options="{'no_create': True}"/>
+                        </group>
+                        <group string="Jadwal &amp; Siklus Evaluasi">
+                            <field name="plan_date"/>
+                            <field name="target_completion_date"/>
+                            <field name="review_period"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Identifikasi &amp; Sasaran" name="goals">
+                            <group>
+                                <field name="problem_identification" placeholder="Identifikasi masalah kerentanan sosial yang dialami klien..."/>
+                                <field name="client_strengths" placeholder="Potensi, bakat, atau dukungan yang dimiliki klien..."/>
+                                <field name="short_term_goals" placeholder="Tujuan terukur yang hendak dicapai dalam 1 - 3 bulan..."/>
+                                <field name="long_term_goals" placeholder="Tujuan akhir jangka panjang (kemandirian, kelulusan, reunifikasi keluarga)..."/>
+                            </group>
+                        </page>
+                        <page string="4 Pilar Intervensi Sosial" name="strategies">
+                            <group>
+                                <field name="physical_guidance" placeholder="Strategi pemenuhan gizi, pemeriksaan kesehatan, kebersihan diri..."/>
+                                <field name="mental_spiritual_guidance" placeholder="Pembinaan ibadah keagamaan, konseling moral, budi pekerti..."/>
+                                <field name="social_guidance" placeholder="Konseling individu, terapi perilaku, interaksi kelompok sebaya..."/>
+                                <field name="vocational_training" placeholder="Pelatihan vokasional, kursus keterampilan hidup dan kerja..."/>
+                            </group>
+                        </page>
+                        <page string="Evaluasi Capaian &amp; Hasil" name="evaluation">
+                            <group>
+                                <field name="success_indicators" placeholder="Indikator terukur keberhasilan layanan..."/>
+                                <field name="progress_evaluation" placeholder="Catatan berkala hasil evaluasi perkembangan oleh Peksos..."/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_lks_case_plan" model="ir.actions.act_window">
+        <field name="name">Rencana Intervensi Layanan (Case Plan)</field>
+        <field name="res_model">lks.case.plan</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Susun rencana intervensi layanan individual (Case Plan) untuk setiap klien binaan PPKS.
+            </p>
+        </field>
+    </record>
+
+    <!-- ====================================================================== -->
+    <!-- CASE TERMINATION & REUNION VIEWS                                       -->
+    <!-- ====================================================================== -->
+    <record id="view_lks_case_termination_tree" model="ir.ui.view">
+        <field name="name">lks.case.termination.tree</field>
+        <field name="model">lks.case.termination</field>
+        <field name="arch" type="xml">
+            <list string="Terminasi &amp; Reuni Keluarga" default_order="termination_date desc, id desc">
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="registration_number"/>
+                <field name="termination_date"/>
+                <field name="termination_type" widget="badge"/>
+                <field name="reunion_recipient_name"/>
+                <field name="social_worker_id"/>
+                <field name="state" widget="badge"
+                       decoration-info="state == 'draft'"
+                       decoration-warning="state in ['verified', 'approved']"
+                       decoration-success="state == 'done'"
+                       decoration-danger="state == 'cancel'"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_lks_case_termination_form" model="ir.ui.view">
+        <field name="name">lks.case.termination.form</field>
+        <field name="model">lks.case.termination</field>
+        <field name="arch" type="xml">
+            <form string="Berita Acara Terminasi &amp; Reuni Keluarga">
+                <header>
+                    <button name="action_verify" string="Verifikasi Kesiapan Reuni" type="object"
+                            class="oe_highlight" invisible="state != 'draft'"/>
+                    <button name="action_approve" string="Setujui Terminasi (Pimpinan)" type="object"
+                            class="oe_highlight" groups="lks_core.group_lks_manager" invisible="state != 'verified'"/>
+                    <button name="action_done" string="Klien Resmi Diserahterimakan" type="object"
+                            class="btn-success" invisible="state != 'approved'"/>
+                    <button name="action_cancel" string="Batalkan" type="object"
+                            invisible="state in ['cancel', 'done']"/>
+                    <button name="action_set_to_draft" string="Kembalikan ke Draft" type="object"
+                            invisible="state != 'cancel'"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,verified,approved,done"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" string="Nomor Berita Acara Terminasi / Reuni"/>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                        <h3>
+                            <field name="partner_id" options="{'no_create': True}" placeholder="Pilih Klien PPKS"/>
+                        </h3>
+                    </div>
+                    <group>
+                        <group string="Klien &amp; Bentuk Terminasi">
+                            <field name="registration_number"/>
+                            <field name="ppks_category_id"/>
+                            <field name="termination_date"/>
+                            <field name="termination_type"/>
+                        </group>
+                        <group string="Penanggung Jawab Lembaga">
+                            <field name="social_worker_id"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="court_decree_number" invisible="termination_type != 'legal_adoption'"/>
+                            <field name="court_decree_file" filename="name" invisible="termination_type != 'legal_adoption'"/>
+                        </group>
+                    </group>
+
+                    <group string="Data Keluarga / Pihak Penerima Klien" invisible="termination_type in ['deceased', 'independence']">
+                        <group>
+                            <field name="reunion_recipient_name"/>
+                            <field name="reunion_relation"/>
+                            <field name="reunion_nik"/>
+                        </group>
+                        <group>
+                            <field name="reunion_phone"/>
+                            <field name="reunion_address"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Asesmen Kesiapan &amp; Evaluasi" name="readiness">
+                            <group>
+                                <field name="home_readiness_notes" placeholder="Hasil kunjungan rumah (Home Visit) mengenai kesiapan ekonomi dan sosial keluarga..."/>
+                                <field name="client_readiness_notes" placeholder="Kesiapan emosional dan mental klien untuk kembali tinggal bersama keluarga..."/>
+                            </group>
+                        </page>
+                        <page string="Rencana Bimbingan Lanjut (Aftercare)" name="aftercare">
+                            <group>
+                                <field name="aftercare_plan" placeholder="Jadwal pendampingan dan monitoring pasca-terminasi (monitoring 1 bulan, 3 bulan, 6 bulan)..."/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_lks_case_termination" model="ir.actions.act_window">
+        <field name="name">Terminasi &amp; Reuni Keluarga</field>
+        <field name="res_model">lks.case.termination</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Kelola proses terminasi layanan dan pengembalian anak/lansia ke keluarga (Reunifikasi Keluarga).
+            </p>
+        </field>
+    </record>
+</odoo>

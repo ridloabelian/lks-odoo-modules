@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_isak35_financial_report_wizard_account_user,isak35.financial.report.wizard.account.user,model_isak35_financial_report_wizard,account.group_account_invoice,1,1,1,1
+access_isak35_financial_report_wizard_account_manager,isak35.financial.report.wizard.account.manager,model_isak35_financial_report_wizard,account.group_account_manager,1,1,1,1
+access_isak35_financial_report_wizard_lks_manager,isak35.financial.report.wizard.lks.manager,model_isak35_financial_report_wizard,lks_core.group_lks_manager,1,1,1,1

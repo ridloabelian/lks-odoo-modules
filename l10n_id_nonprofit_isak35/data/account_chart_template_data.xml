@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <!-- ====================================================================== -->
+    <!-- BAGAN AKUN STANDAR (CHART OF ACCOUNTS) ISAK 35 ENTITAS NONLABA / LKS   -->
+    <!-- Standar DSAK IAI - Pengganti PSAK 45                                    -->
+    <!-- ====================================================================== -->
+
+    <!-- 1. ASET LANCAR -->
+    <record id="account_110000" model="account.account">
+        <field name="code">110000</field>
+        <field name="name">Kas Kecil Operasional Panti (Tanpa Pembatasan)</field>
+        <field name="account_type">asset_cash</field>
+        <field name="isak35_group">asset_current</field>
+        <field name="isak35_cash_flow_category">cash_equivalent</field>
+    </record>
+
+    <record id="account_111000" model="account.account">
+        <field name="code">111000</field>
+        <field name="name">Bank Operasional Yayasan / LKS (Tanpa Pembatasan)</field>
+        <field name="account_type">asset_cash</field>
+        <field name="isak35_group">asset_current</field>
+        <field name="isak35_cash_flow_category">cash_equivalent</field>
+    </record>
+
+    <record id="account_112000" model="account.account">
+        <field name="code">112000</field>
+        <field name="name">Kas &amp; Bank Terikat Hibah Program (Dengan Pembatasan)</field>
+        <field name="account_type">asset_cash</field>
+        <field name="isak35_group">asset_current</field>
+        <field name="isak35_cash_flow_category">cash_equivalent</field>
+    </record>
+
+    <record id="account_113000" model="account.account">
+        <field name="code">113000</field>
+        <field name="name">Piutang Janji Donasi / Hibah Pemerintah</field>
+        <field name="account_type">asset_receivable</field>
+        <field name="isak35_group">asset_current</field>
+        <field name="isak35_cash_flow_category">operating</field>
+    </record>
+
+    <record id="account_114000" model="account.account">
+        <field name="code">114000</field>
+        <field name="name">Persediaan Beras, Sembako &amp; Logistik Panti</field>
+        <field name="account_type">asset_current</field>
+        <field name="isak35_group">asset_current</field>
+        <field name="isak35_cash_flow_category">operating</field>
+    </record>
+
+    <!-- 2. ASET TETAP & TIDAK LANCAR -->
+    <record id="account_120000" model="account.account">
+        <field name="code">120000</field>
+        <field name="name">Tanah Bangunan Panti / Fasilitas Sosial</field>
+        <field name="account_type">asset_non_current</field>
+        <field name="isak35_group">asset_non_current</field>
+        <field name="isak35_cash_flow_category">investing</field>
+    </record>
+
+    <record id="account_121000" model="account.account">
+        <field name="code">121000</field>
+        <field name="name">Bangunan Gedung Asrama &amp; Fasilitas Pelayanan</field>
+        <field name="account_type">asset_non_current</field>
+        <field name="isak35_group">asset_non_current</field>
+        <field name="isak35_cash_flow_category">investing</field>
+    </record>
+
+    <record id="account_122000" model="account.account">
+        <field name="code">122000</field>
+        <field name="name">Kendaraan Ambulans &amp; Operasional Panti</field>
+        <field name="account_type">asset_non_current</field>
+        <field name="isak35_group">asset_non_current</field>
+        <field name="isak35_cash_flow_category">investing</field>
+    </record>
+
+    <record id="account_123000" model="account.account">
+        <field name="code">123000</field>
+        <field name="name">Inventaris Tempat Tidur, Sarana Belajar &amp; Alat Medis</field>
+        <field name="account_type">asset_non_current</field>
+        <field name="isak35_group">asset_non_current</field>
+        <field name="isak35_cash_flow_category">investing</field>
+    </record>
+
+    <record id="account_129000" model="account.account">
+        <field name="code">129000</field>
+        <field name="name">Akumulasi Penyusutan Aset Tetap Panti</field>
+        <field name="account_type">asset_non_current</field>
+        <field name="isak35_group">asset_non_current</field>
+        <field name="isak35_cash_flow_category">investing</field>
+    </record>
+
+    <!-- 3. LIABILITAS -->
+    <record id="account_210000" model="account.account">
+        <field name="code">210000</field>
+        <field name="name">Utang Usaha &amp; Pembelian Logistik Panti</field>
+        <field name="account_type">liability_payable</field>
+        <field name="isak35_group">liability_current</field>
+        <field name="isak35_cash_flow_category">operating</field>
+    </record>
+
+    <record id="account_211000" model="account.account">
+        <field name="code">211000</field>
+        <field name="name">Beban Gaji Pengasuh / Peksos Masih Harus Dibayar</field>
+        <field name="account_type">liability_current</field>
+        <field name="isak35_group">liability_current</field>
+        <field name="isak35_cash_flow_category">operating</field>
+    </record>
+
+    <record id="account_212000" model="account.account">
+        <field name="code">212000</field>
+        <field name="name">Pendapatan Hibah Ditangguhkan (Penerimaan Bersyarat di Muka)</field>
+        <field name="account_type">liability_current</field>
+        <field name="isak35_group">liability_current</field>
+        <field name="isak35_cash_flow_category">operating</field>
+    </record>
+
+    <record id="account_220000" model="account.account">
+        <field name="code">220000</field>
+        <field name="name">Liabilitas Jangka Panjang Lainnya</field>
+        <field name="account_type">liability_non_current</field>
+        <field name="isak35_group">liability_non_current</field>
+        <field name="isak35_cash_flow_category">financing</field>
+    </record>
+
+    <!-- 4. ASET NETO (EQUITY NONLABA) -->
+    <record id="account_310000" model="account.account">
+        <field name="code">310000</field>
+        <field name="name">Aset Neto Tanpa Pembatasan - Saldo Awal</field>
+        <field name="account_type">equity</field>
+        <field name="isak35_group">equity_unrestricted</field>
+        <field name="isak35_cash_flow_category">none</field>
+    </record>
+
+    <record id="account_311000" model="account.account">
+        <field name="code">311000</field>
+        <field name="name">Aset Neto Tanpa Pembatasan - Kenaikan/(Penurunan) Berjalan</field>
+        <field name="account_type">equity_unaffected</field>
+        <field name="isak35_group">equity_unrestricted</field>
+        <field name="isak35_cash_flow_category">none</field>
+    </record>
+
+    <record id="account_320000" model="account.account">
+        <field name="code">320000</field>
+        <field name="name">Aset Neto Dengan Pembatasan - Saldo Awal</field>
+        <field name="account_type">equity</field>
+        <field name="isak35_group">equity_restricted</field>
+        <field name="isak35_cash_flow_category">none</field>
+    </record>
+
+    <record id="account_321000" model="account.account">
+        <field name="code">321000</field>
+        <field name="name">Aset Neto Dengan Pembatasan - Penambahan Periode Berjalan</field>
+        <field name="account_type">equity</field>
+        <field name="isak35_group">equity_restricted</field>
+        <field name="isak35_cash_flow_category">none</field>
+    </record>
+
+    <!-- 5. PENDAPATAN & SUMBANGAN -->
+    <record id="account_410000" model="account.account">
+        <field name="code">410000</field>
+        <field name="name">Pendapatan Sumbangan Bebas / Donasi Tidak Terikat</field>
+        <field name="account_type">income</field>
+        <field name="isak35_group">revenue_unrestricted</field>
+        <field name="isak35_cash_flow_category">operating</field>
+    </record>
+
+    <record id="account_411000" model="account.account">
+        <field name="code">411000</field>
+        <field name="name">Infaq, Sedekah &amp; Bantuan Masyarakat Operasional</field>
+        <field name="account_type">income</field>
+        <field name="isak35_group">revenue_unrestricted</field>
+        <field name="isak35_cash_flow_category">operating</field>
+    </record>
+
+    <record id="account_420000" model="account.account">
+        <field name="code">420000</field>
+        <field name="name">Pendapatan Jasa Layanan &amp; Usaha Mandiri Vokasional</field>
+        <field name="account_type">income</field>
+        <field name="isak35_group">revenue_unrestricted</field>
+        <field name="isak35_cash_flow_category">operating</field>
+    </record>
+
+    <record id="account_430000" model="account.account">
+        <field name="code">430000</field>
+        <field name="name">Pendapatan Hibah Kemensos / APBN / APBD (Dengan Pembatasan)</field>
+        <field name="account_type">income</field>
+        <field name="isak35_group">revenue_restricted</field>
+        <field name="isak35_cash_flow_category">operating</field>
+    </record>
+
+    <record id="account_431000" model="account.account">
+        <field name="code">431000</field>
+        <field name="name">Pendapatan Hibah Lembaga Donor / CSR (Dengan Pembatasan)</field>
+        <field name="account_type">income</field>
+        <field name="isak35_group">revenue_restricted</field>
+        <field name="isak35_cash_flow_category">operating</field>
+    </record>
+
+    <record id="account_490000" model="account.account">
+        <field name="code">490000</field>
+        <field name="name">Aset Neto Terbebaskan dari Pembatasan (Pemenuhan Program)</field>
+        <field name="account_type">income_other</field>
+        <field name="isak35_group">net_assets_released</field>
+        <field name="isak35_cash_flow_category">none</field>
+    </record>
+
+    <!-- 6. BEBAN PROGRAM PELAYANAN SOSIAL -->
+    <record id="account_510000" model="account.account">
+        <field name="code">510000</field>
+        <field name="name">Beban Program Permakanan &amp; Kebutuhan Gizi Klien Panti</field>
+        <field name="account_type">expense</field>
+        <field name="isak35_group">expense_program</field>
+        <field name="isak35_cash_flow_category">operating</field>
+    </record>
+
+    <record id="account_520000" model="account.account">
+        <field name="code">520000</field>
+        <field name="name">Beban Program Pendidikan, Seragam &amp; Beasiswa Klien</field>
+        <field name="account_type">expense</field>
+        <field name="isak35_group">expense_program</field>
+        <field name="isak35_cash_flow_category">operating</field>
+    </record>
+
+    <record id="account_530000" model="account.account">
+        <field name="code">530000</field>
+        <field name="name">Beban Program Kesehatan, Obat &amp; Perawatan Medis Klien</field>
+        <field name="account_type">expense</field>
+        <field name="isak35_group">expense_program</field>
+        <field name="isak35_cash_flow_category">operating</field>
+    </record>
+
+    <record id="account_540000" model="account.account">
+        <field name="code">540000</field>
+        <field name="name">Beban Program Bimbingan Mental, Rohani &amp; Pelatihan Vokasional</field>
+        <field name="account_type">expense</field>
+        <field name="isak35_group">expense_program</field>
+        <field name="isak35_cash_flow_category">operating</field>
+    </record>
+
+    <record id="account_550000" model="account.account">
+        <field name="code">550000</field>
+        <field name="name">Beban Bantuan Keluarga &amp; Reintegrasi Sosial / Reuni</field>
+        <field name="account_type">expense</field>
+        <field name="isak35_group">expense_program</field>
+        <field name="isak35_cash_flow_category">operating</field>
+    </record>
+
+    <!-- 7. BEBAN PENDUKUNG (MANAJEMEN, UMUM & FUNDRAISING) -->
+    <record id="account_610000" model="account.account">
+        <field name="code">610000</field>
+        <field name="name">Beban Gaji &amp; Tunjangan Pegawai / Pengasuh Panti</field>
+        <field name="account_type">expense</field>
+        <field name="isak35_group">expense_support</field>
+        <field name="isak35_cash_flow_category">operating</field>
+    </record>
+
+    <record id="account_620000" model="account.account">
+        <field name="code">620000</field>
+        <field name="name">Beban Listrik, Air, Telepon &amp; Internet Panti</field>
+        <field name="account_type">expense</field>
+        <field name="isak35_group">expense_support</field>
+        <field name="isak35_cash_flow_category">operating</field>
+    </record>
+
+    <record id="account_630000" model="account.account">
+        <field name="code">630000</field>
+        <field name="name">Beban Pemeliharaan Sarana Gedung, Asrama &amp; MCK</field>
+        <field name="account_type">expense</field>
+        <field name="isak35_group">expense_support</field>
+        <field name="isak35_cash_flow_category">operating</field>
+    </record>
+
+    <record id="account_640000" model="account.account">
+        <field name="code">640000</field>
+        <field name="name">Beban Penyusutan Aset Tetap Panti</field>
+        <field name="account_type">expense_depreciation</field>
+        <field name="isak35_group">expense_support</field>
+        <field name="isak35_cash_flow_category">none</field>
+    </record>
+
+    <record id="account_650000" model="account.account">
+        <field name="code">650000</field>
+        <field name="name">Beban Penggalangan Dana (Fundraising) &amp; Publikasi</field>
+        <field name="account_type">expense</field>
+        <field name="isak35_group">expense_support</field>
+        <field name="isak35_cash_flow_category">operating</field>
+    </record>
+</odoo>

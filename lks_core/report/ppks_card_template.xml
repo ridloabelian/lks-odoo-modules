@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_ppks_card_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <div class="article page" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 12px; margin: 20px;">
+                    <!-- Border ID Card -->
+                    <div style="border: 2px solid #047857; border-radius: 12px; padding: 20px; max-width: 650px; margin: 0 auto; background-color: #ffffff;">
+                        <!-- Header ID Card -->
+                        <div style="border-bottom: 2px solid #047857; padding-bottom: 12px; margin-bottom: 15px;">
+                            <table style="width: 100%;">
+                                <tr>
+                                    <td style="width: 20%; vertical-align: middle;">
+                                        <img t-if="doc.company_id.logo" t-att-src="image_data_uri(doc.company_id.logo)" style="max-height: 60px; max-width: 100px;"/>
+                                    </td>
+                                    <td style="width: 80%; text-align: center; vertical-align: middle;">
+                                        <div style="font-size: 15px; font-weight: bold; text-transform: uppercase; color: #047857;">
+                                            <t t-esc="doc.company_id.name"/>
+                                        </div>
+                                        <div style="font-size: 11px; color: #555;">
+                                            LEMBAGA KESEJAHTERAAN SOSIAL (LKS) BERIZIN KEMENSOS RI
+                                        </div>
+                                        <div style="font-size: 10px; color: #777;">
+                                            <t t-esc="doc.company_id.street"/>, <t t-esc="doc.company_id.city"/> - <t t-esc="doc.company_id.phone"/>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <!-- Card Title -->
+                        <div style="text-align: center; background-color: #ecfdf5; border-radius: 6px; padding: 6px; margin-bottom: 15px;">
+                            <span style="font-size: 13px; font-weight: bold; color: #065f46; letter-spacing: 1px;">
+                                KARTU IDENTITAS KLIEN PPKS
+                            </span>
+                        </div>
+
+                        <!-- Card Body -->
+                        <table style="width: 100%; border-collapse: collapse;">
+                            <tr>
+                                <!-- Foto Klien -->
+                                <td style="width: 30%; vertical-align: top; text-align: center; padding-right: 15px;">
+                                    <div style="border: 1px solid #ccc; padding: 4px; border-radius: 8px; display: inline-block;">
+                                        <img t-if="doc.image_1920" t-att-src="image_data_uri(doc.image_1920)" style="width: 120px; height: 150px; object-fit: cover; border-radius: 6px;"/>
+                                        <div t-if="not doc.image_1920" style="width: 120px; height: 150px; background-color: #f3f4f6; display: flex; align-items: center; justify-content: center; color: #9ca3af; border-radius: 6px;">
+                                            Foto Klien 3x4
+                                        </div>
+                                    </div>
+                                    <div style="margin-top: 8px; font-weight: bold; font-size: 11px; color: #047857;">
+                                        <t t-esc="doc.registration_number or '-'"/>
+                                    </div>
+                                </td>
+
+                                <!-- Biodata Klien -->
+                                <td style="width: 70%; vertical-align: top;">
+                                    <table style="width: 100%; font-size: 11px; line-height: 1.6;">
+                                        <tr>
+                                            <td style="width: 35%; font-weight: bold; color: #374151;">Nama Lengkap</td>
+                                            <td style="width: 5%;">:</td>
+                                            <td style="width: 60%; font-weight: bold; text-transform: uppercase;"><t t-esc="doc.name"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-weight: bold; color: #374151;">NIK KTP</td>
+                                            <td>:</td>
+                                            <td><t t-esc="doc.nik or '-'"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-weight: bold; color: #374151;">Jenis Kelamin / Usia</td>
+                                            <td>:</td>
+                                            <td>
+                                                <t t-if="doc.gender == 'male'">Laki-laki</t>
+                                                <t t-elif="doc.gender == 'female'">Perempuan</t>
+                                                <t t-else="">-</t>
+                                                / <t t-esc="doc.age"/> Tahun
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-weight: bold; color: #374151;">Tempat, Tgl Lahir</td>
+                                            <td>:</td>
+                                            <td>
+                                                <t t-esc="doc.birth_place or ''"/>,
+                                                <t t-if="doc.birth_date" t-esc="doc.birth_date.strftime('%d %B %Y')"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-weight: bold; color: #374151;">Kategori PPKS</td>
+                                            <td>:</td>
+                                            <td><span style="font-weight: bold; color: #047857;"><t t-esc="doc.ppks_category_id.name or '-'"/></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-weight: bold; color: #374151;">Status Residensial</td>
+                                            <td>:</td>
+                                            <td>
+                                                <t t-if="doc.residential_status == 'in_facility'">Dalam Panti (Asrama)</t>
+                                                <t t-elif="doc.residential_status == 'day_care'">Penitipan Harian (Day Care)</t>
+                                                <t t-else="">Luar Panti / Bina Keluarga</t>
+                                            </td>
+                                        </tr>
+                                        <tr t-if="doc.residential_status == 'in_facility'">
+                                            <td style="font-weight: bold; color: #374151;">Hunian / Kamar</td>
+                                            <td>:</td>
+                                            <td><t t-esc="doc.dormitory_id.name or '-'"/> - <t t-esc="doc.room_id.name or '-'"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-weight: bold; color: #374151;">Peksos Pendamping</td>
+                                            <td>:</td>
+                                            <td><t t-esc="doc.social_worker_id.name or '-'"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-weight: bold; color: #374151;">Wali / Kontak Darurat</td>
+                                            <td>:</td>
+                                            <td><t t-esc="doc.guardian_id.name or '-'"/> (<t t-esc="doc.guardian_phone or '-'"/>)</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!-- Card Footer -->
+                        <div style="margin-top: 15px; border-top: 1px dashed #ccc; padding-top: 8px; font-size: 9px; color: #6b7280; text-align: center;">
+                            Kartu ini diterbitkan resmi oleh Lembaga Kesejahteraan Sosial sebagai bukti registrasi penerima pelayanan sosial.
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

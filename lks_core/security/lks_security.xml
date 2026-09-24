@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="category_lks_management" model="ir.module.category">
+        <field name="name">Lembaga Kesejahteraan Sosial (LKS)</field>
+        <field name="description">Sistem Pengelolaan LKS, Panti Asuhan, Panti Wreda, dan Fasilitas Kesejahteraan Sosial Kemensos RI</field>
+        <field name="sequence">30</field>
+    </record>
+
+    <!-- Group 1: Pengasuh / Staf Asrama (Caregiver) -->
+    <record id="group_lks_caregiver" model="res.groups">
+        <field name="name">Pengasuh / Staf Asrama</field>
+        <field name="category_id" ref="category_lks_management"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        <field name="comment">Pengguna dapat mencatat kehadiran harian, data tempat tidur/kamar, dan melihat profil dasar klien asuhan.</field>
+    </record>
+
+    <!-- Group 2: Pekerja Sosial / Sakti Peksos (Social Worker) -->
+    <record id="group_lks_social_worker" model="res.groups">
+        <field name="name">Pekerja Sosial (Peksos)</field>
+        <field name="category_id" ref="category_lks_management"/>
+        <field name="implied_ids" eval="[(4, ref('group_lks_caregiver'))]"/>
+        <field name="comment">Pekerja sosial profesional / Sakti Peksos bertugas mengelola Case Management, Asesmen, Rencana Intervensi, dan Terminasi.</field>
+    </record>
+
+    <!-- Group 3: Pimpinan LKS / Kepala Panti (Manager) -->
+    <record id="group_lks_manager" model="res.groups">
+        <field name="name">Pimpinan LKS / Kepala Panti</field>
+        <field name="category_id" ref="category_lks_management"/>
+        <field name="implied_ids" eval="[(4, ref('group_lks_social_worker'))]"/>
+        <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+        <field name="comment">Akses penuh pengelolaan panti, verifikasi legalitas, persetujuan penerimaan dan terminasi klien, serta konfigurasi master data.</field>
+    </record>
+
+    <!-- Multi-company Rules -->
+    <record id="rule_lks_dormitory_company" model="ir.rule">
+        <field name="name">LKS Dormitory Multi-Company</field>
+        <field name="model_id" ref="model_lks_facility_dormitory"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="rule_lks_room_company" model="ir.rule">
+        <field name="name">LKS Room Multi-Company</field>
+        <field name="model_id" ref="model_lks_facility_room"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="rule_lks_admission_company" model="ir.rule">
+        <field name="name">LKS Admission Multi-Company</field>
+        <field name="model_id" ref="model_lks_admission_register"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+</odoo>

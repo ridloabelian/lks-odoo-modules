@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <!-- ====================================================================== -->
+    <!-- 6 STANDAR NASIONAL AKREDITASI LKS - BALAKS KEMENSOS RI                 -->
+    <!-- ====================================================================== -->
+
+    <!-- STANDAR 1: PROGRAM -->
+    <record id="std_1_program" model="lks.balaks.standard">
+        <field name="code">STD-01</field>
+        <field name="name">Standar Program Pelayanan Sosial</field>
+        <field name="sequence">1</field>
+        <field name="weight">15.0</field>
+        <field name="description">Kesesuaian program pelayanan sosial, legalitas izin operasional Dinsos, dan penetapan kluster sasaran PPKS.</field>
+    </record>
+
+    <record id="ind_1_1" model="lks.balaks.indicator">
+        <field name="standard_id" ref="std_1_program"/>
+        <field name="code">IND-1.1</field>
+        <field name="name">Legalitas Badan Hukum (SK Kemenkumham, Akta Notaris, NPWP Yayasan)</field>
+        <field name="sequence">1</field>
+        <field name="max_score">5.0</field>
+        <field name="required_evidence">Salinan Akta Notaris, SK Menkumham RI, NPWP Lembaga, Rekening Bank atas nama Lembaga.</field>
+    </record>
+
+    <record id="ind_1_2" model="lks.balaks.indicator">
+        <field name="standard_id" ref="std_1_program"/>
+        <field name="code">IND-1.2</field>
+        <field name="name">Tanda Daftar LKS &amp; Izin Operasional Aktif dari Dinas Sosial</field>
+        <field name="sequence">2</field>
+        <field name="max_score">5.0</field>
+        <field name="required_evidence">Surat Tanda Pendaftaran LKS Dinsos, Izin Penyelenggaraan Kesejahteraan Sosial (IPKS) yang masih berlaku.</field>
+    </record>
+
+    <record id="ind_1_3" model="lks.balaks.indicator">
+        <field name="standard_id" ref="std_1_program"/>
+        <field name="code">IND-1.3</field>
+        <field name="name">Kesesuaian Jenis Pelayanan dengan Kategori PPKS Sasaran</field>
+        <field name="sequence">3</field>
+        <field name="max_score">5.0</field>
+        <field name="required_evidence">Buku Profil Lembaga, Dokumen Rencana Kerja Tahunan, Data Klasifikasi 26 Kategori PPKS.</field>
+    </record>
+
+    <!-- STANDAR 2: PROSES PELAYANAN -->
+    <record id="std_2_proses" model="lks.balaks.standard">
+        <field name="code">STD-02</field>
+        <field name="name">Standar Proses Pelayanan (7 Tahapan Peksos)</field>
+        <field name="sequence">2</field>
+        <field name="weight">20.0</field>
+        <field name="description">Penerapan siklus manajemen kasus (Case Management) 7 tahapan standar pekerjaan sosial Kemensos.</field>
+    </record>
+
+    <record id="ind_2_1" model="lks.balaks.indicator">
+        <field name="standard_id" ref="std_2_proses"/>
+        <field name="code">IND-2.1</field>
+        <field name="name">Penerapan Tahap Intake / Registrasi Buku Induk Penerimaan</field>
+        <field name="sequence">1</field>
+        <field name="max_score">5.0</field>
+        <field name="required_evidence">Buku Induk Klien, Formulir Penerimaan Awal, Berita Acara Serah Terima Penerimaan Klien.</field>
+    </record>
+
+    <record id="ind_2_2" model="lks.balaks.indicator">
+        <field name="standard_id" ref="std_2_proses"/>
+        <field name="code">IND-2.2</field>
+        <field name="name">Pelaksanaan Asesmen Komprehensif Masalah &amp; Kebutuhan Klien</field>
+        <field name="sequence">2</field>
+        <field name="max_score">5.0</field>
+        <field name="required_evidence">Instrumen Asesmen Kemiskinan &amp; Kelayakan NPO, Riwayat Hidup Klien, Lembar Genogram Keluarga.</field>
+    </record>
+
+    <record id="ind_2_3" model="lks.balaks.indicator">
+        <field name="standard_id" ref="std_2_proses"/>
+        <field name="code">IND-2.3</field>
+        <field name="name">Penyusunan Rencana Intervensi Layanan Individual (Case Plan)</field>
+        <field name="sequence">3</field>
+        <field name="max_score">5.0</field>
+        <field name="required_evidence">Dokumen Case Plan per Klien, Kontrak Pelayanan, Persetujuan Pimpinan Lembaga.</field>
+    </record>
+
+    <record id="ind_2_4" model="lks.balaks.indicator">
+        <field name="standard_id" ref="std_2_proses"/>
+        <field name="code">IND-2.4</field>
+        <field name="name">Pelaksanaan Intervensi 4 Pilar &amp; Monitoring Berkala</field>
+        <field name="sequence">4</field>
+        <field name="max_score">5.0</field>
+        <field name="required_evidence">Jadwal Bimbingan Fisik, Mental Spiritual, Konseling Sosial, Pelatihan Vokasional, Rekam Medis &amp; Rapor Sekolah.</field>
+    </record>
+
+    <record id="ind_2_5" model="lks.balaks.indicator">
+        <field name="standard_id" ref="std_2_proses"/>
+        <field name="code">IND-2.5</field>
+        <field name="name">Penyelenggaraan Terminasi, Reuni Keluarga &amp; Bimbingan Lanjut</field>
+        <field name="sequence">5</field>
+        <field name="max_score">5.0</field>
+        <field name="required_evidence">Berita Acara Terminasi, Berita Acara Reuni Keluarga, Laporan Monitoring Kunjungan Rumah (Aftercare).</field>
+    </record>
+
+    <!-- STANDAR 3: MANAJEMEN ORGANISASI -->
+    <record id="std_3_manajemen" model="lks.balaks.standard">
+        <field name="code">STD-03</field>
+        <field name="name">Standar Manajemen Organisasi &amp; Akuntabilitas</field>
+        <field name="sequence">3</field>
+        <field name="weight">15.0</field>
+        <field name="description">Struktur tata kelola, SOP operasional, transparansi pelaporan keuangan berbasis ISAK 35.</field>
+    </record>
+
+    <record id="ind_3_1" model="lks.balaks.indicator">
+        <field name="standard_id" ref="std_3_manajemen"/>
+        <field name="code">IND-3.1</field>
+        <field name="name">Visi, Misi, Struktur Organisasi, dan Uraian Tugas Pegawai</field>
+        <field name="sequence">1</field>
+        <field name="max_score">5.0</field>
+        <field name="required_evidence">Bagan Struktur Organisasi, SK Pengangkatan Pengurus/Staf, Dokumen Job Description tertulis.</field>
+    </record>
+
+    <record id="ind_3_2" model="lks.balaks.indicator">
+        <field name="standard_id" ref="std_3_manajemen"/>
+        <field name="code">IND-3.2</field>
+        <field name="name">Kelengkapan Standar Operasional Prosedur (SOP) Pelayanan</field>
+        <field name="sequence">2</field>
+        <field name="max_score">5.0</field>
+        <field name="required_evidence">Buku Pedoman SOP Penerimaan, Pengasuhan, Penanganan Medis Darurat, Pengaduan, dan Terminasi.</field>
+    </record>
+
+    <record id="ind_3_3" model="lks.balaks.indicator">
+        <field name="standard_id" ref="std_3_manajemen"/>
+        <field name="code">IND-3.3</field>
+        <field name="name">Laporan Keuangan Berstandar ISAK 35 (Posisi Keuangan, Aktivitas, Arus Kas)</field>
+        <field name="sequence">3</field>
+        <field name="max_score">5.0</field>
+        <field name="required_evidence">Buku Laporan Keuangan Tahunan ISAK 35, Laporan Audit Internal/KAP, Rekening Koran Lembaga.</field>
+    </record>
+
+    <!-- STANDAR 4: SDM & PEKERJA SOSIAL -->
+    <record id="std_4_sdm" model="lks.balaks.standard">
+        <field name="code">STD-04</field>
+        <field name="name">Standar Sumber Daya Manusia (SDM &amp; Peksos)</field>
+        <field name="sequence">4</field>
+        <field name="weight">20.0</field>
+        <field name="description">Kualifikasi Pekerja Sosial profesional, STR Kemensos, rasio pendamping terhadap klien binaan.</field>
+    </record>
+
+    <record id="ind_4_1" model="lks.balaks.indicator">
+        <field name="standard_id" ref="std_4_sdm"/>
+        <field name="code">IND-4.1</field>
+        <field name="name">Ketersediaan Pekerja Sosial Profesional Berpendidikan Kesejahteraan Sosial</field>
+        <field name="sequence">1</field>
+        <field name="max_score">5.0</field>
+        <field name="required_evidence">Ijazah S1/D4 Kesejahteraan Sosial atau Tenaga Kesejahteraan Sosial bersertifikat.</field>
+    </record>
+
+    <record id="ind_4_2" model="lks.balaks.indicator">
+        <field name="standard_id" ref="std_4_sdm"/>
+        <field name="code">IND-4.2</field>
+        <field name="name">Kepemilikan Surat Tanda Registrasi (STR) Pekerja Sosial Kemensos RI</field>
+        <field name="sequence">2</field>
+        <field name="max_score">5.0</field>
+        <field name="required_evidence">Salinan STR Pekerja Sosial aktif yang diterbitkan Dewan Berwenang Kemensos RI.</field>
+    </record>
+
+    <record id="ind_4_3" model="lks.balaks.indicator">
+        <field name="standard_id" ref="std_4_sdm"/>
+        <field name="code">IND-4.3</field>
+        <field name="name">Kecukupan Rasio Pekerja Sosial terhadap Klien Binaan (Maksimal 1 : 20)</field>
+        <field name="sequence">3</field>
+        <field name="max_score">5.0</field>
+        <field name="required_evidence">Daftar Klien PPKS per Pekerja Sosial Pembina, Perhitungan Rasio Klien di Profil Lembaga.</field>
+    </record>
+
+    <!-- STANDAR 5: SARANA DAN PRASARANA -->
+    <record id="std_5_sarpras" model="lks.balaks.standard">
+        <field name="code">STD-05</field>
+        <field name="name">Standar Sarana dan Prasarana</field>
+        <field name="sequence">5</field>
+        <field name="weight">15.0</field>
+        <field name="description">Kelaikan gedung asrama, ruang konseling tertutup, sanitasi MCK sehat, keselamatan APAR.</field>
+    </record>
+
+    <record id="ind_5_1" model="lks.balaks.indicator">
+        <field name="standard_id" ref="std_5_sarpras"/>
+        <field name="code">IND-5.1</field>
+        <field name="name">Kelaikan Gedung Tempat Tinggal / Asrama &amp; Ventilasi Udara</field>
+        <field name="sequence">1</field>
+        <field name="max_score">5.0</field>
+        <field name="required_evidence">Foto Bangunan Asrama, Denah Ruangan, Sertifikat Kelaikan Bangunan (IMB/PBG).</field>
+    </record>
+
+    <record id="ind_5_2" model="lks.balaks.indicator">
+        <field name="standard_id" ref="std_5_sarpras"/>
+        <field name="code">IND-5.2</field>
+        <field name="name">Ketersediaan Ruang Konseling Psikososial &amp; Ruang Kesehatan/P3K</field>
+        <field name="sequence">2</field>
+        <field name="max_score">5.0</field>
+        <field name="required_evidence">Foto Ruang Konseling Khusus yang Menjaga Kerahasiaan Klien, Kotak Obat &amp; Fasilitas P3K.</field>
+    </record>
+
+    <record id="ind_5_3" model="lks.balaks.indicator">
+        <field name="standard_id" ref="std_5_sarpras"/>
+        <field name="code">IND-5.3</field>
+        <field name="name">Fasilitas MCK Memadai, Sanitasi Bersih &amp; Alat Pemadam Api Ringan (APAR)</field>
+        <field name="sequence">3</field>
+        <field name="max_score">5.0</field>
+        <field name="required_evidence">Rasio Kamar Mandi/Toilet Sehat, Bukti Ketersediaan Tabung APAR Aktif dan Jalur Evakuasi.</field>
+    </record>
+
+    <!-- STANDAR 6: HASIL LAYANAN (OUTCOME) -->
+    <record id="std_6_hasil" model="lks.balaks.standard">
+        <field name="code">STD-06</field>
+        <field name="name">Standar Hasil Layanan (Outcome Kesejahteraan Sosial)</field>
+        <field name="sequence">6</field>
+        <field name="weight">15.0</field>
+        <field name="description">Indikator keberhasilan reunifikasi keluarga, kelulusan pendidikan, dan kepuasan penerima manfaat.</field>
+    </record>
+
+    <record id="ind_6_1" model="lks.balaks.indicator">
+        <field name="standard_id" ref="std_6_hasil"/>
+        <field name="code">IND-6.1</field>
+        <field name="name">Persentase Keberhasilan Penyatuan Kembali (Reuni) ke Keluarga atau Adopsi Sah</field>
+        <field name="sequence">1</field>
+        <field name="max_score">5.0</field>
+        <field name="required_evidence">Rekapitulasi Berita Acara Reuni Keluarga dalam 3 Tahun Terakhir, Dokumen Aftercare Sukses.</field>
+    </record>
+
+    <record id="ind_6_2" model="lks.balaks.indicator">
+        <field name="standard_id" ref="std_6_hasil"/>
+        <field name="code">IND-6.2</field>
+        <field name="name">Kelulusan Jenjang Pendidikan Klien &amp; Kesiapan Kemandirian Kerja</field>
+        <field name="sequence">2</field>
+        <field name="max_score">5.0</field>
+        <field name="required_evidence">Daftar Ijazah Klien yang Lulus, Data Alumni Bekerja atau Melanjutkan ke Perguruan Tinggi.</field>
+    </record>
+
+    <record id="ind_6_3" model="lks.balaks.indicator">
+        <field name="standard_id" ref="std_6_hasil"/>
+        <field name="code">IND-6.3</field>
+        <field name="name">Indeks Kepuasan Penerima Manfaat &amp; Evaluasi Umpan Balik Keluarga</field>
+        <field name="sequence">3</field>
+        <field name="max_score">5.0</field>
+        <field name="required_evidence">Kuesioner Kepuasan Layanan Klien/Wali, Buku Saran dan Penanganan Keluhan.</field>
+    </record>
+</odoo>

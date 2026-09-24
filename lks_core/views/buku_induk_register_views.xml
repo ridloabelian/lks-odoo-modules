@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_lks_admission_register_tree" model="ir.ui.view">
+        <field name="name">lks.admission.register.tree</field>
+        <field name="model">lks.admission.register</field>
+        <field name="arch" type="xml">
+            <list string="Buku Induk Registrasi Penerimaan">
+                <field name="name"/>
+                <field name="date_received"/>
+                <field name="partner_id"/>
+                <field name="registration_number"/>
+                <field name="ppks_category_id"/>
+                <field name="surrenderer_type"/>
+                <field name="surrenderer_name"/>
+                <field name="receiver_id"/>
+                <field name="state" widget="badge"
+                       decoration-info="state == 'draft'"
+                       decoration-warning="state == 'verified'"
+                       decoration-success="state == 'approved'"
+                       decoration-danger="state == 'cancel'"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_lks_admission_register_form" model="ir.ui.view">
+        <field name="name">lks.admission.register.form</field>
+        <field name="model">lks.admission.register</field>
+        <field name="arch" type="xml">
+            <form string="Buku Induk Registrasi Penerimaan Klien">
+                <header>
+                    <button name="action_verify" string="Verifikasi Berita Acara" type="object"
+                            class="oe_highlight" invisible="state != 'draft'"/>
+                    <button name="action_approve" string="Setujui Penerimaan Masuk" type="object"
+                            class="oe_highlight" groups="lks_core.group_lks_manager" invisible="state != 'verified'"/>
+                    <button name="action_cancel" string="Batalkan" type="object"
+                            invisible="state in ['cancel', 'approved']"/>
+                    <button name="action_set_to_draft" string="Kembalikan ke Draft" type="object"
+                            invisible="state != 'cancel'"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,verified,approved"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" string="Nomor Berita Acara Penerimaan"/>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Data Klien PPKS yang Diterima">
+                            <field name="partner_id" options="{'no_create': True}"/>
+                            <field name="registration_number"/>
+                            <field name="ppks_category_id"/>
+                            <field name="residential_status"/>
+                            <field name="date_received"/>
+                        </group>
+                        <group string="Petugas Pelaksana Panti">
+                            <field name="receiver_id"/>
+                            <field name="social_worker_id"/>
+                            <field name="witness_name"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                    <group string="Pihak yang Menyerahkan Klien">
+                        <group>
+                            <field name="surrenderer_type"/>
+                            <field name="surrenderer_name"/>
+                            <field name="surrenderer_institution"/>
+                        </group>
+                        <group>
+                            <field name="surrenderer_id_card"/>
+                            <field name="surrenderer_phone"/>
+                            <field name="surrenderer_address"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Kondisi Awal &amp; Alasan Penyerahan" name="initial_intake">
+                            <group>
+                                <field name="intake_reason"/>
+                                <field name="initial_physical_condition"/>
+                                <field name="initial_mental_condition"/>
+                                <field name="belongings_brought"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_lks_admission_register" model="ir.actions.act_window">
+        <field name="name">Buku Induk Registrasi Penerimaan</field>
+        <field name="res_model">lks.admission.register</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Catat penerimaan baru klien PPKS ke dalam Buku Induk Panti / Lembaga Sosial.
+            </p>
+        </field>
+    </record>
+</odoo>

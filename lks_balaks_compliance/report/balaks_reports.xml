@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Report Action: Lembar Evaluasi Audit Kesiapan Akreditasi BALAKS -->
+    <record id="action_report_balaks_audit" model="ir.actions.report">
+        <field name="name">Laporan Kesiapan Akreditasi BALAKS Kemensos</field>
+        <field name="model">lks.balaks.audit</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">lks_balaks_compliance.report_balaks_audit_template</field>
+        <field name="report_file">lks_balaks_compliance.report_balaks_audit_template</field>
+        <field name="print_report_name">'Kesiapan_Akreditasi_BALAKS_' + (object.name.replace(' ', '_'))</field>
+        <field name="binding_model_id" ref="model_lks_balaks_audit"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <!-- Report Action: Profil Lembaga LKS & Data Binaan Format Dinsos -->
+    <record id="action_report_lks_profile" model="ir.actions.report">
+        <field name="name">Laporan Profil Lembaga LKS untuk Dinsos</field>
+        <field name="model">res.company</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">lks_balaks_compliance.report_lks_profile_template</field>
+        <field name="report_file">lks_balaks_compliance.report_lks_profile_template</field>
+        <field name="print_report_name">'Profil_LKS_Dinsos_' + (object.name.replace(' ', '_'))</field>
+        <field name="binding_model_id" ref="base.model_res_company"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_company_form_lks_inherit" model="ir.ui.view">
+        <field name="name">res.company.form.lks.inherit</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Profil LKS &amp; Akreditasi BALAKS" name="lks_balaks_profile">
+                    <group>
+                        <group string="Legalitas Lembaga Kesejahteraan Sosial (LKS)">
+                            <field name="lks_registration_number"/>
+                            <field name="lks_operational_permit"/>
+                            <field name="lks_permit_expiry_date"/>
+                            <field name="kemenkumham_sk_number"/>
+                            <field name="nib_oss_number"/>
+                        </group>
+                        <group string="Sertifikasi Akreditasi BALAKS Kemensos">
+                            <field name="balaks_accreditation_grade" widget="badge"/>
+                            <field name="balaks_certificate_number"/>
+                            <field name="balaks_expiry_date"/>
+                        </group>
+                    </group>
+                    <group string="Statistik Kelembagaan &amp; Rasio Pekerja Sosial (Peksos)">
+                        <group>
+                            <field name="total_active_clients"/>
+                            <field name="total_residential_clients"/>
+                        </group>
+                        <group>
+                            <field name="total_social_workers"/>
+                            <field name="social_worker_client_ratio" widget="badge" class="fw-bold fs-6"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

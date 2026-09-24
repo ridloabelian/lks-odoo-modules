@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_medical_record_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <div class="article page" style="font-family: 'Times New Roman', Times, serif; font-size: 13px; line-height: 1.5; color: #111;">
+                    <!-- Kop Surat -->
+                    <div style="text-align: center; border-bottom: 3px double #000; padding-bottom: 10px; margin-bottom: 20px;">
+                        <div style="font-size: 16px; font-weight: bold; text-transform: uppercase;">
+                            <t t-esc="doc.company_id.name"/>
+                        </div>
+                        <div style="font-size: 13px; font-weight: bold;">
+                            CATATAN REKAM MEDIS &amp; KESEHATAN KLIEN PANTI
+                        </div>
+                        <div style="font-size: 11px;">
+                            Alamat: <t t-esc="doc.company_id.street"/>, <t t-esc="doc.company_id.city"/>
+                        </div>
+                    </div>
+
+                    <!-- Judul -->
+                    <div style="text-align: center; margin-bottom: 20px;">
+                        <h4 style="margin: 0; font-weight: bold; text-decoration: underline; text-transform: uppercase;">
+                            RESUME REKAM MEDIS KESEHATAN DASAR KLIEN
+                        </h4>
+                    </div>
+
+                    <!-- Profil Klien -->
+                    <table style="width: 100%; border-collapse: collapse; margin-bottom: 15px;">
+                        <tr>
+                            <td style="width: 25%; font-weight: bold;">Nama Klien PPKS</td>
+                            <td style="width: 3%;">:</td>
+                            <td style="width: 35%; font-weight: bold; text-transform: uppercase;"><t t-esc="doc.partner_id.name"/></td>
+                            <td style="width: 20%; font-weight: bold;">Golongan Darah</td>
+                            <td style="width: 2%;">:</td>
+                            <td style="width: 15%; font-weight: bold;"><t t-esc="doc.blood_type"/> (<t t-esc="doc.rhesus"/>)</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold;">No. Induk PPKS</td>
+                            <td>:</td>
+                            <td><t t-esc="doc.registration_number or '-'"/></td>
+                            <td style="font-weight: bold;">Jaminan BPJS</td>
+                            <td>:</td>
+                            <td><t t-esc="doc.bpjs_type"/></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold;">Jenis Kelamin / Usia</td>
+                            <td>:</td>
+                            <td><t t-esc="doc.gender"/> / <t t-esc="doc.age"/> Thn</td>
+                            <td style="font-weight: bold;">No. Kartu BPJS/KIS</td>
+                            <td>:</td>
+                            <td><t t-esc="doc.bpjs_number or '-'"/></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold;">Status Gizi (IMT)</td>
+                            <td>:</td>
+                            <td><t t-esc="doc.latest_bmi"/> (<t t-esc="doc.latest_bmi_status"/>)</td>
+                            <td style="font-weight: bold;">Faskes 1</td>
+                            <td>:</td>
+                            <td><t t-esc="doc.bpjs_faskes or '-'"/></td>
+                        </tr>
+                    </table>
+
+                    <!-- Riwayat Alergi & Penyakit Kronis -->
+                    <div style="border: 1px solid #999; padding: 10px; margin-bottom: 15px; background-color: #fafafa;">
+                        <p style="margin: 4px 0;"><strong>Riwayat Alergi (Obat/Makanan):</strong> <t t-esc="doc.allergies or 'Tidak ada alergi yang dilaporkan'"/></p>
+                        <p style="margin: 4px 0;"><strong>Penyakit Bawaan / Kronis:</strong> <t t-esc="doc.chronic_diseases or 'Tidak ada riwayat penyakit kronis'"/></p>
+                        <p style="margin: 4px 0;"><strong>Kebutuhan Khusus / Alat Bantu:</strong> <t t-esc="doc.disability_special_needs or 'Tidak ada'"/></p>
+                    </div>
+
+                    <!-- Riwayat Kunjungan Medis -->
+                    <div style="font-weight: bold; margin-bottom: 5px;">RIWAYAT PEMERIKSAAN &amp; KUNJUNGAN BEROBAT:</div>
+                    <table style="width: 100%; border-collapse: collapse; border: 1px solid #000; font-size: 11px; margin-bottom: 20px;">
+                        <thead>
+                            <tr style="background-color: #f3f4f6; text-align: center;">
+                                <th style="border: 1px solid #000; padding: 5px;">Tanggal</th>
+                                <th style="border: 1px solid #000; padding: 5px;">Fasilitas / Dokter</th>
+                                <th style="border: 1px solid #000; padding: 5px;">Keluhan Utama</th>
+                                <th style="border: 1px solid #000; padding: 5px;">Diagnosis Medis</th>
+                                <th style="border: 1px solid #000; padding: 5px;">Tindakan &amp; Terapi Obat</th>
+                                <th style="border: 1px solid #000; padding: 5px;">Tensi / BB</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="doc.visit_ids" t-as="v">
+                                <tr>
+                                    <td style="border: 1px solid #000; padding: 4px; text-align: center;">
+                                        <t t-if="v.date" t-esc="v.date.strftime('%d/%m/%Y')"/>
+                                    </td>
+                                    <td style="border: 1px solid #000; padding: 4px;">
+                                        <t t-esc="v.facility_name or v.healthcare_facility"/><br/>
+                                        <small><t t-esc="v.medical_staff or ''"/></small>
+                                    </td>
+                                    <td style="border: 1px solid #000; padding: 4px;"><t t-esc="v.complaint"/></td>
+                                    <td style="border: 1px solid #000; padding: 4px;"><strong><t t-esc="v.diagnosis"/></strong></td>
+                                    <td style="border: 1px solid #000; padding: 4px;">
+                                        <t t-esc="v.treatment or ''"/><br/>
+                                        <small><em><t t-esc="v.prescription or ''"/></em></small>
+                                    </td>
+                                    <td style="border: 1px solid #000; padding: 4px; text-align: center;">
+                                        <t t-esc="v.blood_pressure or '-'"/> / <t t-esc="v.weight"/> kg
+                                    </td>
+                                </tr>
+                            </t>
+                            <tr t-if="not doc.visit_ids">
+                                <td colspan="6" style="border: 1px solid #000; padding: 10px; text-align: center; color: #777;">
+                                    Belum ada catatan riwayat berobat.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- Tanda Tangan -->
+                    <table style="width: 100%; text-align: center; margin-top: 30px;">
+                        <tr>
+                            <td style="width: 50%;">
+                                Petugas Kesehatan / Medis Panti,<br/><br/><br/><br/>
+                                ( _______________________________ )
+                            </td>
+                            <td style="width: 50%;">
+                                <t t-esc="doc.company_id.city or 'Tempat'"/>, <t t-esc="context_timestamp(datetime.datetime.now()).strftime('%d %B %Y')"/><br/>
+                                Pekerja Sosial Pendamping,<br/><br/><br/><br/>
+                                ( _______________________________ )
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <template id="report_reunion_bast_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <div class="article page" style="font-family: 'Times New Roman', Times, serif; font-size: 13px; line-height: 1.6; color: #111;">
+                    <!-- Kop Surat -->
+                    <div style="text-align: center; border-bottom: 3px double #000; padding-bottom: 10px; margin-bottom: 20px;">
+                        <div style="font-size: 16px; font-weight: bold; text-transform: uppercase;">
+                            <t t-esc="doc.company_id.name"/>
+                        </div>
+                        <div style="font-size: 13px; font-weight: bold;">
+                            LEMBAGA KESEJAHTERAAN SOSIAL (LKS)
+                        </div>
+                        <div style="font-size: 11px;">
+                            Alamat: <t t-esc="doc.company_id.street"/>, <t t-esc="doc.company_id.city"/>
+                        </div>
+                    </div>
+
+                    <!-- Judul -->
+                    <div style="text-align: center; margin-bottom: 20px;">
+                        <h4 style="margin: 0; font-weight: bold; text-decoration: underline; text-transform: uppercase;">
+                            BERITA ACARA TERMINASI &amp; PENYATUAN KEMBALI (REUNIFIKASI) KELUARGA
+                        </h4>
+                        <div style="font-size: 12px; margin-top: 5px;">
+                            Nomor: <strong><t t-esc="doc.name"/></strong>
+                        </div>
+                    </div>
+
+                    <p>
+                        Pada hari ini, tanggal <strong><t t-if="doc.termination_date" t-esc="doc.termination_date.strftime('%d %B %Y')"/></strong>, bertempat di <t t-esc="doc.company_id.name"/>, telah dilaksanakan proses terminasi pelayanan dan penyatuan kembali (reunifikasi) keluarga antara:
+                    </p>
+
+                    <table style="width: 100%; margin-left: 15px; margin-bottom: 15px;">
+                        <tr>
+                            <td style="width: 25%; font-weight: bold;">I. PIHAK PERTAMA (LEMBAGA)</td>
+                            <td style="width: 3%;">:</td>
+                            <td style="width: 72%;"></td>
+                        </tr>
+                        <tr>
+                            <td style="padding-left: 15px;">Nama Petugas / Peksos</td>
+                            <td>:</td>
+                            <td><strong><t t-esc="doc.social_worker_id.name"/></strong></td>
+                        </tr>
+                        <tr>
+                            <td style="padding-left: 15px;">Lembaga</td>
+                            <td>:</td>
+                            <td><t t-esc="doc.company_id.name"/></td>
+                        </tr>
+                    </table>
+
+                    <table style="width: 100%; margin-left: 15px; margin-bottom: 15px;">
+                        <tr>
+                            <td style="width: 25%; font-weight: bold;">II. PIHAK KEDUA (KELUARGA)</td>
+                            <td style="width: 3%;">:</td>
+                            <td style="width: 72%;"></td>
+                        </tr>
+                        <tr>
+                            <td style="padding-left: 15px;">Nama Penerima</td>
+                            <td>:</td>
+                            <td><strong><t t-esc="doc.reunion_recipient_name"/></strong></td>
+                        </tr>
+                        <tr>
+                            <td style="padding-left: 15px;">Hubungan Kekeluargaan</td>
+                            <td>:</td>
+                            <td><t t-esc="doc.reunion_relation"/></td>
+                        </tr>
+                        <tr>
+                            <td style="padding-left: 15px;">NIK KTP</td>
+                            <td>:</td>
+                            <td><t t-esc="doc.reunion_nik or '-'"/></td>
+                        </tr>
+                        <tr>
+                            <td style="padding-left: 15px;">No. Telepon / HP</td>
+                            <td>:</td>
+                            <td><t t-esc="doc.reunion_phone or '-'"/></td>
+                        </tr>
+                        <tr>
+                            <td style="padding-left: 15px;">Alamat Baru Klien</td>
+                            <td>:</td>
+                            <td><t t-esc="doc.reunion_address or '-'"/></td>
+                        </tr>
+                    </table>
+
+                    <p>
+                        PIHAK PERTAMA menyerahkan kembali penerima manfaat (PPKS):
+                    </p>
+
+                    <div style="border: 1px solid #999; padding: 10px; margin-bottom: 15px; background-color: #fafafa;">
+                        <table style="width: 100%; font-size: 12px;">
+                            <tr>
+                                <td style="width: 30%;"><strong>Nama Klien PPKS</strong></td>
+                                <td style="width: 3%;">:</td>
+                                <td style="width: 67%; font-weight: bold; text-transform: uppercase;"><t t-esc="doc.partner_id.name"/></td>
+                            </tr>
+                            <tr>
+                                <td><strong>No. Induk Registrasi</strong></td>
+                                <td>:</td>
+                                <td><t t-esc="doc.registration_number or '-'"/></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Kategori PPKS</strong></td>
+                                <td>:</td>
+                                <td><t t-esc="doc.ppks_category_id.name or '-'"/></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Bentuk Terminasi</strong></td>
+                                <td>:</td>
+                                <td><t t-esc="doc.termination_type"/></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Rencana Bimbingan Lanjut</strong></td>
+                                <td>:</td>
+                                <td><t t-esc="doc.aftercare_plan or '-'"/></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <p>
+                        PIHAK KEDUA bersedia menerima kembali dan bertanggung jawab penuh untuk mengasuh, merawat, mendidik, serta melindungi klien dengan penuh kasih sayang, dan mengizinkan Pekerja Sosial untuk melakukan pemantauan berkala (aftercare).
+                    </p>
+
+                    <table style="width: 100%; text-align: center; margin-top: 30px;">
+                        <tr>
+                            <td style="width: 50%;">
+                                PIHAK KEDUA (KELUARGA),<br/><br/><br/><br/>
+                                ( <strong><t t-esc="doc.reunion_recipient_name"/></strong> )
+                            </td>
+                            <td style="width: 50%;">
+                                PIHAK PERTAMA (PEKSOS),<br/><br/><br/><br/>
+                                ( <strong><t t-esc="doc.social_worker_id.name"/></strong> )
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="padding-top: 25px;">
+                                Menyetujui &amp; Mengetahui,<br/>
+                                <strong>Kepala / Pimpinan Lembaga Kesejahteraan Sosial</strong><br/><br/><br/><br/>
+                                ( ______________________________________ )
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

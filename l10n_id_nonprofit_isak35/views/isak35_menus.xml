@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Menu in LKS Module Root -->
+    <menuitem id="menu_lks_finance_main"
+              name="Keuangan &amp; Akuntansi ISAK 35"
+              parent="lks_core.menu_lks_root"
+              sequence="40"/>
+
+    <menuitem id="menu_lks_isak35_report"
+              name="4 Laporan Keuangan Wajib ISAK 35"
+              parent="menu_lks_finance_main"
+              action="action_isak35_financial_report_wizard"
+              sequence="10"/>
+
+    <menuitem id="menu_lks_isak35_chart_of_accounts"
+              name="Bagan Akun Nonlaba (COA)"
+              parent="menu_lks_finance_main"
+              action="account.action_account_form"
+              sequence="20"/>
+</odoo>

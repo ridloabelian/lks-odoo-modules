@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Report Action: Case Plan Progress Report -->
+    <record id="action_report_case_plan" model="ir.actions.report">
+        <field name="name">Rapor Perkembangan Layanan Klien</field>
+        <field name="model">lks.case.plan</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">lks_social_care.report_case_plan_template</field>
+        <field name="report_file">lks_social_care.report_case_plan_template</field>
+        <field name="print_report_name">'Case_Plan_' + (object.name.replace('/', '_'))</field>
+        <field name="binding_model_id" ref="model_lks_case_plan"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <!-- Report Action: Medical Record Resume -->
+    <record id="action_report_medical_record" model="ir.actions.report">
+        <field name="name">Resume Rekam Medis &amp; Kesehatan Klien</field>
+        <field name="model">lks.medical.record</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">lks_social_care.report_medical_record_template</field>
+        <field name="report_file">lks_social_care.report_medical_record_template</field>
+        <field name="print_report_name">'Rekam_Medis_' + (object.partner_id.name)</field>
+        <field name="binding_model_id" ref="model_lks_medical_record"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <!-- Report Action: BAST Reuni Keluarga & Terminasi -->
+    <record id="action_report_reunion_bast" model="ir.actions.report">
+        <field name="name">Berita Acara Reuni &amp; Terminasi PPKS</field>
+        <field name="model">lks.case.termination</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">lks_social_care.report_reunion_bast_template</field>
+        <field name="report_file">lks_social_care.report_reunion_bast_template</field>
+        <field name="print_report_name">'BAST_Reuni_' + (object.name.replace('/', '_'))</field>
+        <field name="binding_model_id" ref="model_lks_case_termination"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

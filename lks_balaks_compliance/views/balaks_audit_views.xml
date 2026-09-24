@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Audit Tree -->
+    <record id="view_lks_balaks_audit_tree" model="ir.ui.view">
+        <field name="name">lks.balaks.audit.tree</field>
+        <field name="model">lks.balaks.audit</field>
+        <field name="arch" type="xml">
+            <list string="Audit Kesiapan Akreditasi BALAKS" default_order="audit_date desc, id desc">
+                <field name="name"/>
+                <field name="audit_date"/>
+                <field name="target_cluster" widget="badge"/>
+                <field name="auditor_id"/>
+                <field name="total_score" widget="progressbar"/>
+                <field name="accreditation_prediction" widget="badge"
+                       decoration-success="accreditation_prediction == 'A'"
+                       decoration-info="accreditation_prediction == 'B'"
+                       decoration-warning="accreditation_prediction == 'C'"
+                       decoration-danger="accreditation_prediction == 'unaccredited'"/>
+                <field name="evidence_completeness_rate" widget="progressbar"/>
+                <field name="state" widget="badge"
+                       decoration-info="state == 'draft'"
+                       decoration-warning="state == 'in_progress'"
+                       decoration-success="state == 'completed'"
+                       decoration-danger="state == 'cancel'"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Audit Form -->
+    <record id="view_lks_balaks_audit_form" model="ir.ui.view">
+        <field name="name">lks.balaks.audit.form</field>
+        <field name="model">lks.balaks.audit</field>
+        <field name="arch" type="xml">
+            <form string="Audit Kesiapan Akreditasi BALAKS Kemensos">
+                <header>
+                    <button name="action_load_indicators" string="Muat Indikator 6 Standar BALAKS" type="object"
+                            class="btn-outline-primary" icon="fa-refresh" invisible="state != 'draft'"/>
+                    <button name="action_start" string="Mulai Penilaian / Audit" type="object"
+                            class="oe_highlight" invisible="state != 'draft'"/>
+                    <button name="action_complete" string="Selesaikan Penilaian" type="object"
+                            class="oe_highlight" invisible="state != 'in_progress'"/>
+                    <button name="action_cancel" string="Batalkan" type="object"
+                            invisible="state in ['cancel', 'completed']"/>
+                    <button name="action_set_to_draft" string="Kembalikan ke Draft" type="object"
+                            invisible="state != 'cancel'"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,in_progress,completed"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" string="Nama Sesi Audit Akreditasi"/>
+                        <h1>
+                            <field name="name" placeholder="misal: Audit Kesiapan Akreditasi LKS Tahun 2026"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Informasi Pelaksanaan">
+                            <field name="audit_date"/>
+                            <field name="auditor_id"/>
+                            <field name="target_cluster"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                        <group string="Hasil Evaluasi &amp; Prediksi Akreditasi">
+                            <field name="total_score" widget="progressbar"/>
+                            <field name="accreditation_prediction" widget="badge"/>
+                            <field name="evidence_completeness_rate" widget="progressbar"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Matriks Penilaian Indikator &amp; Eviden" name="lines">
+                            <field name="line_ids">
+                                <list editable="bottom">
+                                    <field name="standard_id" readonly="1"/>
+                                    <field name="indicator_id" readonly="1"/>
+                                    <field name="max_score" readonly="1"/>
+                                    <field name="score_obtained"/>
+                                    <field name="evidence_status" widget="badge"
+                                           decoration-success="evidence_status == 'complete'"
+                                           decoration-warning="evidence_status == 'partial'"
+                                           decoration-danger="evidence_status == 'missing'"/>
+                                    <field name="notes" placeholder="Catatan temuan / bukti fisik..."/>
+                                    <field name="evidence_file" filename="evidence_filename"/>
+                                    <field name="evidence_filename" column_invisible="1"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Rekomendasi Pemenuhan Dokumen" name="recommendations">
+                            <field name="recommendations" placeholder="Rencana tindak lanjut dan perbaikan dokumen sebelum kedatangan Tim Asesor Akreditasi Kemensos..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_lks_balaks_audit" model="ir.actions.act_window">
+        <field name="name">Audit Kesiapan Akreditasi BALAKS</field>
+        <field name="res_model">lks.balaks.audit</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Lakukan simulasi dan audit kesiapan akreditasi 6 Standar Nasional BALAKS Kemensos RI.
+            </p>
+        </field>
+    </record>
+</odoo>

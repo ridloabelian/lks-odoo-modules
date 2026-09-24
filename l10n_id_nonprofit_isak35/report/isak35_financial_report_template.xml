@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_isak35_financial_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-set="data" t-value="doc.get_financial_report_data()"/>
+                
+                <!-- ============================================================== -->
+                <!-- 1. LAPORAN POSISI KEUANGAN (STATEMENT OF FINANCIAL POSITION)   -->
+                <!-- ============================================================== -->
+                <t t-if="doc.report_type in ['all', 'position']">
+                    <div class="article page" style="font-family: 'Times New Roman', Times, serif; font-size: 12px; line-height: 1.4; color: #111; page-break-after: always; padding: 15px;">
+                        <!-- Kop Laporan -->
+                        <div style="text-align: center; border-bottom: 2px solid #000; padding-bottom: 8px; margin-bottom: 15px;">
+                            <div style="font-size: 15px; font-weight: bold; text-transform: uppercase;">
+                                <t t-esc="data['company_name']"/>
+                            </div>
+                            <div style="font-size: 14px; font-weight: bold; text-transform: uppercase; margin-top: 4px;">
+                                LAPORAN POSISI KEUANGAN
+                            </div>
+                            <div style="font-size: 11px; font-style: italic;">
+                                Per <t t-esc="data['date_to'].strftime('%d %B %Y')"/> (Standar ISAK 35 - Entitas Berorientasi Nonlaba)
+                            </div>
+                            <div style="font-size: 10px; color: #555; text-align: right;">
+                                (Dinyatakan dalam Rupiah Indonesia)
+                            </div>
+                        </div>
+
+                        <!-- Tabel Posisi Keuangan -->
+                        <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+                            <!-- HEADER ASET -->
+                            <tr style="background-color: #f3f4f6; font-weight: bold;">
+                                <td colspan="2" style="padding: 6px; border-top: 1px solid #000; border-bottom: 1px solid #000;">ASET</td>
+                                <td style="padding: 6px; text-align: right; border-top: 1px solid #000; border-bottom: 1px solid #000;">JUMLAH (RP)</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" style="padding: 4px 6px; font-weight: bold; font-style: italic;">Aset Lancar:</td>
+                            </tr>
+                            <tr>
+                                <td style="width: 5%;"></td>
+                                <td style="width: 65%; padding: 3px 6px;">Kas dan Setara Kas - Tanpa Pembatasan</td>
+                                <td style="width: 30%; padding: 3px 6px; text-align: right;"><t t-esc="'{:,.2f}'.format(data['cash_unrestricted'])"/></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td style="padding: 3px 6px;">Kas dan Setara Kas - Dengan Pembatasan (Hibah Terikat)</td>
+                                <td style="padding: 3px 6px; text-align: right;"><t t-esc="'{:,.2f}'.format(data['cash_restricted'])"/></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td style="padding: 3px 6px;">Piutang Donatur / Janji Sumbangan</td>
+                                <td style="padding: 3px 6px; text-align: right;"><t t-esc="'{:,.2f}'.format(data['receivables'])"/></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td style="padding: 3px 6px;">Persediaan Sembako &amp; Logistik Panti</td>
+                                <td style="padding: 3px 6px; text-align: right;"><t t-esc="'{:,.2f}'.format(data['other_current_assets'])"/></td>
+                            </tr>
+                            <tr style="font-weight: bold; border-top: 1px dashed #ccc;">
+                                <td></td>
+                                <td style="padding: 4px 6px;">Jumlah Aset Lancar</td>
+                                <td style="padding: 4px 6px; text-align: right;"><t t-esc="'{:,.2f}'.format(data['current_assets'])"/></td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="3" style="padding: 4px 6px; font-weight: bold; font-style: italic; padding-top: 10px;">Aset Tidak Lancar:</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td style="padding: 3px 6px;">Aset Tetap (Tanah, Bangunan Asrama, Ambulans, Inventaris) - Neto</td>
+                                <td style="padding: 3px 6px; text-align: right;"><t t-esc="'{:,.2f}'.format(data['fixed_assets'])"/></td>
+                            </tr>
+                            <tr style="font-weight: bold; border-top: 1px dashed #ccc;">
+                                <td></td>
+                                <td style="padding: 4px 6px;">Jumlah Aset Tidak Lancar</td>
+                                <td style="padding: 4px 6px; text-align: right;"><t t-esc="'{:,.2f}'.format(data['fixed_assets'])"/></td>
+                            </tr>
+                            <tr style="background-color: #e5e7eb; font-weight: bold; border-top: 2px solid #000; border-bottom: 2px solid #000;">
+                                <td colspan="2" style="padding: 6px;">TOTAL ASET</td>
+                                <td style="padding: 6px; text-align: right;"><t t-esc="'{:,.2f}'.format(data['total_assets'])"/></td>
+                            </tr>
+
+                            <!-- HEADER LIABILITAS & ASET NETO -->
+                            <tr style="background-color: #f3f4f6; font-weight: bold;">
+                                <td colspan="2" style="padding: 6px; border-top: 2px solid #000; border-bottom: 1px solid #000; padding-top: 15px;">LIABILITAS DAN ASET NETO</td>
+                                <td style="padding: 6px; text-align: right; border-top: 2px solid #000; border-bottom: 1px solid #000; padding-top: 15px;">JUMLAH (RP)</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" style="padding: 4px 6px; font-weight: bold; font-style: italic;">Liabilitas Jangka Pendek:</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td style="padding: 3px 6px;">Utang Usaha &amp; Beban Masih Harus Dibayar</td>
+                                <td style="padding: 3px 6px; text-align: right;"><t t-esc="'{:,.2f}'.format(data['current_liabilities'])"/></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td style="padding: 3px 6px;">Liabilitas Jangka Panjang</td>
+                                <td style="padding: 3px 6px; text-align: right;"><t t-esc="'{:,.2f}'.format(data['non_current_liabilities'])"/></td>
+                            </tr>
+                            <tr style="font-weight: bold; border-top: 1px dashed #ccc;">
+                                <td></td>
+                                <td style="padding: 4px 6px;">Jumlah Liabilitas</td>
+                                <td style="padding: 4px 6px; text-align: right;"><t t-esc="'{:,.2f}'.format(data['total_liabilities'])"/></td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="3" style="padding: 4px 6px; font-weight: bold; font-style: italic; padding-top: 10px;">Aset Neto (Ekuitas Entitas Nonlaba):</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td style="padding: 3px 6px;">Aset Neto Tanpa Pembatasan (Unrestricted Net Assets)</td>
+                                <td style="padding: 3px 6px; text-align: right;"><t t-esc="'{:,.2f}'.format(data['net_assets_unrestricted'])"/></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td style="padding: 3px 6px;">Aset Neto Dengan Pembatasan (Restricted Net Assets)</td>
+                                <td style="padding: 3px 6px; text-align: right;"><t t-esc="'{:,.2f}'.format(data['net_assets_restricted'])"/></td>
+                            </tr>
+                            <tr style="font-weight: bold; border-top: 1px dashed #ccc;">
+                                <td></td>
+                                <td style="padding: 4px 6px;">Jumlah Aset Neto</td>
+                                <td style="padding: 4px 6px; text-align: right;"><t t-esc="'{:,.2f}'.format(data['total_net_assets'])"/></td>
+                            </tr>
+                            <tr style="background-color: #e5e7eb; font-weight: bold; border-top: 2px solid #000; border-bottom: 2px solid #000;">
+                                <td colspan="2" style="padding: 6px;">TOTAL LIABILITAS DAN ASET NETO</td>
+                                <td style="padding: 6px; text-align: right;"><t t-esc="'{:,.2f}'.format(data['total_liabilities_and_net_assets'])"/></td>
+                            </tr>
+                        </table>
+
+                        <!-- Tanda Tangan -->
+                        <table style="width: 100%; text-align: center; margin-top: 30px;">
+                            <tr>
+                                <td style="width: 50%;">
+                                    Mengetahui,<br/>
+                                    <strong>Ketua Yayasan / Pimpinan LKS</strong><br/><br/><br/><br/>
+                                    ( _______________________________ )
+                                </td>
+                                <td style="width: 50%;">
+                                    <t t-esc="doc.company_id.city or 'Tempat'"/>, <t t-esc="data['date_to'].strftime('%d %B %Y')"/><br/>
+                                    <strong>Bendahara / Bagian Keuangan</strong><br/><br/><br/><br/>
+                                    ( _______________________________ )
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </t>
+
+                <!-- ============================================================== -->
+                <!-- 2. LAPORAN PENGHASILAN KOMPREHENSIF / AKTIVITAS                -->
+                <!-- ============================================================== -->
+                <t t-if="doc.report_type in ['all', 'activities']">
+                    <div class="article page" style="font-family: 'Times New Roman', Times, serif; font-size: 12px; line-height: 1.4; color: #111; page-break-after: always; padding: 15px;">
+                        <!-- Kop Laporan -->
+                        <div style="text-align: center; border-bottom: 2px solid #000; padding-bottom: 8px; margin-bottom: 15px;">
+                            <div style="font-size: 15px; font-weight: bold; text-transform: uppercase;">
+                                <t t-esc="data['company_name']"/>
+                            </div>
+                            <div style="font-size: 14px; font-weight: bold; text-transform: uppercase; margin-top: 4px;">
+                                LAPORAN PENGHASILAN KOMPREHENSIF (LAPORAN AKTIVITAS)
+                            </div>
+                            <div style="font-size: 11px; font-style: italic;">
+                                Untuk Periode yang Berakhir pada <t t-esc="data['date_to'].strftime('%d %B %Y')"/> (Standar ISAK 35)
+                            </div>
+                        </div>
+
+                        <!-- Tabel Laporan Aktivitas dengan 3 Kolom -->
+                        <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+                            <thead>
+                                <tr style="background-color: #f3f4f6; font-weight: bold; text-align: center; border-top: 2px solid #000; border-bottom: 1px solid #000;">
+                                    <th style="width: 46%; padding: 6px; text-align: left;">URAIAN AKTIVITAS</th>
+                                    <th style="width: 18%; padding: 6px; text-align: right;">Tanpa Pembatasan (Rp)</th>
+                                    <th style="width: 18%; padding: 6px; text-align: right;">Dengan Pembatasan (Rp)</th>
+                                    <th style="width: 18%; padding: 6px; text-align: right;">Total (Rp)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="font-weight: bold; font-style: italic;">
+                                    <td colspan="4" style="padding: 4px 6px;">PENDAPATAN &amp; SUMBANGAN:</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 3px 6px;">Sumbangan Masyarakat, Infaq &amp; Donasi Bebas</td>
+                                    <td style="padding: 3px 6px; text-align: right;"><t t-esc="'{:,.2f}'.format(data['rev_unrestricted'])"/></td>
+                                    <td style="padding: 3px 6px; text-align: right;">-</td>
+                                    <td style="padding: 3px 6px; text-align: right;"><t t-esc="'{:,.2f}'.format(data['rev_unrestricted'])"/></td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 3px 6px;">Hibah Terikat Pemerintah (Kemensos/APBD) &amp; Donor CSR</td>
+                                    <td style="padding: 3px 6px; text-align: right;">-</td>
+                                    <td style="padding: 3px 6px; text-align: right;"><t t-esc="'{:,.2f}'.format(data['rev_restricted'])"/></td>
+                                    <td style="padding: 3px 6px; text-align: right;"><t t-esc="'{:,.2f}'.format(data['rev_restricted'])"/></td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 3px 6px;">Aset Neto Terbebaskan dari Pembatasan (Pemenuhan Program)</td>
+                                    <td style="padding: 3px 6px; text-align: right;"><t t-esc="'{:,.2f}'.format(data['released_assets'])"/></td>
+                                    <td style="padding: 3px 6px; text-align: right;">(<t t-esc="'{:,.2f}'.format(data['released_assets'])"/>)</td>
+                                    <td style="padding: 3px 6px; text-align: right;">-</td>
+                                </tr>
+                                <tr style="font-weight: bold; border-top: 1px dashed #999; border-bottom: 1px solid #999;">
+                                    <td style="padding: 4px 6px;">Jumlah Pendapatan &amp; Reklasifikasi</td>
+                                    <td style="padding: 4px 6px; text-align: right;"><t t-esc="'{:,.2f}'.format(data['total_rev_unrestricted'])"/></td>
+                                    <td style="padding: 4px 6px; text-align: right;"><t t-esc="'{:,.2f}'.format(data['change_restricted'])"/></td>
+                                    <td style="padding: 4px 6px; text-align: right;"><t t-esc="'{:,.2f}'.format(data['rev_unrestricted'] + data['rev_restricted'])"/></td>
+                                </tr>
+
+                                <tr style="font-weight: bold; font-style: italic; padding-top: 10px;">
+                                    <td colspan="4" style="padding: 6px 6px 4px 6px;">BEBAN-BEBAN:</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 3px 6px;">Beban Program Pelayanan Sosial (Permakanan, Pendidikan, Kesehatan)</td>
+                                    <td style="padding: 3px 6px; text-align: right;"><t t-esc="'{:,.2f}'.format(data['exp_program'])"/></td>
+                                    <td style="padding: 3px 6px; text-align: right;">-</td>
+                                    <td style="padding: 3px 6px; text-align: right;"><t t-esc="'{:,.2f}'.format(data['exp_program'])"/></td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 3px 6px;">Beban Pendukung (Manajemen, Operasional Kantor &amp; Fundraising)</td>
+                                    <td style="padding: 3px 6px; text-align: right;"><t t-esc="'{:,.2f}'.format(data['exp_support'])"/></td>
+                                    <td style="padding: 3px 6px; text-align: right;">-</td>
+                                    <td style="padding: 3px 6px; text-align: right;"><t t-esc="'{:,.2f}'.format(data['exp_support'])"/></td>
+                                </tr>
+                                <tr style="font-weight: bold; border-top: 1px dashed #999; border-bottom: 1px solid #999;">
+                                    <td style="padding: 4px 6px;">Jumlah Beban</td>
+                                    <td style="padding: 4px 6px; text-align: right;"><t t-esc="'{:,.2f}'.format(data['total_expenses'])"/></td>
+                                    <td style="padding: 4px 6px; text-align: right;">-</td>
+                                    <td style="padding: 4px 6px; text-align: right;"><t t-esc="'{:,.2f}'.format(data['total_expenses'])"/></td>
+                                </tr>
+
+                                <tr style="background-color: #e5e7eb; font-weight: bold; border-top: 2px solid #000; border-bottom: 2px solid #000;">
+                                    <td style="padding: 6px;">KENAIKAN / (PENURUNAN) ASET NETO</td>
+                                    <td style="padding: 6px; text-align: right;"><t t-esc="'{:,.2f}'.format(data['change_unrestricted'])"/></td>
+                                    <td style="padding: 6px; text-align: right;"><t t-esc="'{:,.2f}'.format(data['change_restricted'])"/></td>
+                                    <td style="padding: 6px; text-align: right;"><t t-esc="'{:,.2f}'.format(data['change_total'])"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <!-- Tanda Tangan -->
+                        <table style="width: 100%; text-align: center; margin-top: 30px;">
+                            <tr>
+                                <td style="width: 50%;">
+                                    Ketua / Pimpinan LKS,<br/><br/><br/><br/>
+                                    ( _______________________________ )
+                                </td>
+                                <td style="width: 50%;">
+                                    Bendahara Yayasan,<br/><br/><br/><br/>
+                                    ( _______________________________ )
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </t>
+
+                <!-- ============================================================== -->
+                <!-- 3. LAPORAN PERUBAHAN ASET NETO                                 -->
+                <!-- ============================================================== -->
+                <t t-if="doc.report_type in ['all', 'net_assets']">
+                    <div class="article page" style="font-family: 'Times New Roman', Times, serif; font-size: 12px; line-height: 1.4; color: #111; page-break-after: always; padding: 15px;">
+                        <div style="text-align: center; border-bottom: 2px solid #000; padding-bottom: 8px; margin-bottom: 15px;">
+                            <div style="font-size: 15px; font-weight: bold; text-transform: uppercase;">
+                                <t t-esc="data['company_name']"/>
+                            </div>
+                            <div style="font-size: 14px; font-weight: bold; text-transform: uppercase; margin-top: 4px;">
+                                LAPORAN PERUBAHAN ASET NETO
+                            </div>
+                            <div style="font-size: 11px; font-style: italic;">
+                                Untuk Periode yang Berakhir pada <t t-esc="data['date_to'].strftime('%d %B %Y')"/> (Standar ISAK 35)
+                            </div>
+                        </div>
+
+                        <table style="width: 100%; border-collapse: collapse; margin-bottom: 25px;">
+                            <thead>
+                                <tr style="background-color: #f3f4f6; font-weight: bold; text-align: center; border-top: 2px solid #000; border-bottom: 1px solid #000;">
+                                    <th style="width: 46%; padding: 6px; text-align: left;">DESKRIPSI PERUBAHAN</th>
+                                    <th style="width: 18%; padding: 6px; text-align: right;">Tanpa Pembatasan (Rp)</th>
+                                    <th style="width: 18%; padding: 6px; text-align: right;">Dengan Pembatasan (Rp)</th>
+                                    <th style="width: 18%; padding: 6px; text-align: right;">Total Aset Neto (Rp)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="padding: 5px 6px; font-weight: bold;">Saldo Awal Aset Neto</td>
+                                    <td style="padding: 5px 6px; text-align: right;"><t t-esc="'{:,.2f}'.format(data['beginning_unrestricted'])"/></td>
+                                    <td style="padding: 5px 6px; text-align: right;"><t t-esc="'{:,.2f}'.format(data['beginning_restricted'])"/></td>
+                                    <td style="padding: 5px 6px; text-align: right; font-weight: bold;"><t t-esc="'{:,.2f}'.format(data['beginning_total'])"/></td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 5px 6px;">Kenaikan / (Penurunan) Bersih Periode Berjalan</td>
+                                    <td style="padding: 5px 6px; text-align: right;"><t t-esc="'{:,.2f}'.format(data['change_unrestricted'])"/></td>
+                                    <td style="padding: 5px 6px; text-align: right;"><t t-esc="'{:,.2f}'.format(data['change_restricted'])"/></td>
+                                    <td style="padding: 5px 6px; text-align: right;"><t t-esc="'{:,.2f}'.format(data['change_total'])"/></td>
+                                </tr>
+                                <tr style="background-color: #e5e7eb; font-weight: bold; border-top: 2px solid #000; border-bottom: 2px solid #000;">
+                                    <td style="padding: 6px;">SALDO AKHIR ASET NETO</td>
+                                    <td style="padding: 6px; text-align: right;"><t t-esc="'{:,.2f}'.format(data['net_assets_unrestricted'])"/></td>
+                                    <td style="padding: 6px; text-align: right;"><t t-esc="'{:,.2f}'.format(data['net_assets_restricted'])"/></td>
+                                    <td style="padding: 6px; text-align: right;"><t t-esc="'{:,.2f}'.format(data['total_net_assets'])"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <table style="width: 100%; text-align: center; margin-top: 40px;">
+                            <tr>
+                                <td style="width: 50%;">
+                                    Ketua / Pimpinan LKS,<br/><br/><br/><br/>
+                                    ( _______________________________ )
+                                </td>
+                                <td style="width: 50%;">
+                                    Bendahara Yayasan,<br/><br/><br/><br/>
+                                    ( _______________________________ )
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </t>
+
+                <!-- ============================================================== -->
+                <!-- 4. LAPORAN ARUS KAS                                            -->
+                <!-- ============================================================== -->
+                <t t-if="doc.report_type in ['all', 'cash_flow']">
+                    <div class="article page" style="font-family: 'Times New Roman', Times, serif; font-size: 12px; line-height: 1.4; color: #111; padding: 15px;">
+                        <div style="text-align: center; border-bottom: 2px solid #000; padding-bottom: 8px; margin-bottom: 15px;">
+                            <div style="font-size: 15px; font-weight: bold; text-transform: uppercase;">
+                                <t t-esc="data['company_name']"/>
+                            </div>
+                            <div style="font-size: 14px; font-weight: bold; text-transform: uppercase; margin-top: 4px;">
+                                LAPORAN ARUS KAS
+                            </div>
+                            <div style="font-size: 11px; font-style: italic;">
+                                Untuk Periode yang Berakhir pada <t t-esc="data['date_to'].strftime('%d %B %Y')"/> (Standar ISAK 35)
+                            </div>
+                        </div>
+
+                        <table style="width: 100%; border-collapse: collapse; margin-bottom: 25px;">
+                            <tr style="background-color: #f3f4f6; font-weight: bold;">
+                                <td colspan="2" style="padding: 6px; border-top: 2px solid #000; border-bottom: 1px solid #000;">ARUS KAS DARI AKTIVITAS OPERASI</td>
+                                <td style="padding: 6px; text-align: right; border-top: 2px solid #000; border-bottom: 1px solid #000;">JUMLAH (RP)</td>
+                            </tr>
+                            <tr>
+                                <td style="width: 5%;"></td>
+                                <td style="width: 65%; padding: 4px 6px;">Penerimaan Kas dari Sumbangan, Donasi, Infaq &amp; Hibah</td>
+                                <td style="width: 30%; padding: 4px 6px; text-align: right;"><t t-esc="'{:,.2f}'.format(data['rev_unrestricted'] + data['rev_restricted'])"/></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td style="padding: 4px 6px;">Pengeluaran Kas untuk Beban Program Sosial &amp; Operasional Panti</td>
+                                <td style="padding: 4px 6px; text-align: right;">(<t t-esc="'{:,.2f}'.format(data['total_expenses'])"/>)</td>
+                            </tr>
+                            <tr style="font-weight: bold; border-top: 1px dashed #999;">
+                                <td></td>
+                                <td style="padding: 5px 6px;">Arus Kas Bersih yang Diperoleh dari Aktivitas Operasi</td>
+                                <td style="padding: 5px 6px; text-align: right;"><t t-esc="'{:,.2f}'.format(data['cash_operating'])"/></td>
+                            </tr>
+
+                            <tr style="background-color: #f3f4f6; font-weight: bold;">
+                                <td colspan="2" style="padding: 6px; border-top: 1px solid #000; border-bottom: 1px solid #000; padding-top: 10px;">ARUS KAS DARI AKTIVITAS INVESTASI</td>
+                                <td style="padding: 6px; text-align: right; border-top: 1px solid #000; border-bottom: 1px solid #000; padding-top: 10px;">JUMLAH (RP)</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td style="padding: 4px 6px;">Perolehan Aset Tetap Panti (Bangunan Asrama, Ambulans, Sarana)</td>
+                                <td style="padding: 4px 6px; text-align: right;"><t t-esc="'{:,.2f}'.format(data['cash_investing'])"/></td>
+                            </tr>
+                            <tr style="font-weight: bold; border-top: 1px dashed #999;">
+                                <td></td>
+                                <td style="padding: 5px 6px;">Arus Kas Bersih untuk Aktivitas Investasi</td>
+                                <td style="padding: 5px 6px; text-align: right;"><t t-esc="'{:,.2f}'.format(data['cash_investing'])"/></td>
+                            </tr>
+
+                            <tr style="background-color: #f3f4f6; font-weight: bold;">
+                                <td colspan="2" style="padding: 6px; border-top: 1px solid #000; border-bottom: 1px solid #000; padding-top: 10px;">ARUS KAS DARI AKTIVITAS PENDANAAN</td>
+                                <td style="padding: 6px; text-align: right; border-top: 1px solid #000; border-bottom: 1px solid #000; padding-top: 10px;">JUMLAH (RP)</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td style="padding: 4px 6px;">Penerimaan Hibah / Sumbangan Terikat Jangka Panjang</td>
+                                <td style="padding: 4px 6px; text-align: right;"><t t-esc="'{:,.2f}'.format(data['cash_financing'])"/></td>
+                            </tr>
+                            <tr style="font-weight: bold; border-top: 1px dashed #999;">
+                                <td></td>
+                                <td style="padding: 5px 6px;">Arus Kas Bersih dari Aktivitas Pendanaan</td>
+                                <td style="padding: 5px 6px; text-align: right;"><t t-esc="'{:,.2f}'.format(data['cash_financing'])"/></td>
+                            </tr>
+
+                            <tr style="background-color: #e5e7eb; font-weight: bold; border-top: 2px solid #000;">
+                                <td colspan="2" style="padding: 6px;">KENAIKAN / (PENURUNAN) BERSIH KAS DAN SETARA KAS</td>
+                                <td style="padding: 6px; text-align: right;"><t t-esc="'{:,.2f}'.format(data['net_cash_flow'])"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="padding: 4px 6px;">Kas dan Setara Kas pada Awal Periode</td>
+                                <td style="padding: 4px 6px; text-align: right;"><t t-esc="'{:,.2f}'.format(data['beginning_cash'])"/></td>
+                            </tr>
+                            <tr style="background-color: #d1d5db; font-weight: bold; border-top: 1px solid #000; border-bottom: 2px solid #000;">
+                                <td colspan="2" style="padding: 6px;">KAS DAN SETARA KAS PADA AKHIR PERIODE</td>
+                                <td style="padding: 6px; text-align: right;"><t t-esc="'{:,.2f}'.format(data['ending_cash'])"/></td>
+                            </tr>
+                        </table>
+
+                        <table style="width: 100%; text-align: center; margin-top: 40px;">
+                            <tr>
+                                <td style="width: 50%;">
+                                    Ketua / Pimpinan LKS,<br/><br/><br/><br/>
+                                    ( _______________________________ )
+                                </td>
+                                <td style="width: 50%;">
+                                    Bendahara Yayasan,<br/><br/><br/><br/>
+                                    ( _______________________________ )
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

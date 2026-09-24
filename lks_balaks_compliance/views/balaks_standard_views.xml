@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Standard Tree -->
+    <record id="view_lks_balaks_standard_tree" model="ir.ui.view">
+        <field name="name">lks.balaks.standard.tree</field>
+        <field name="model">lks.balaks.standard</field>
+        <field name="arch" type="xml">
+            <list string="6 Standar Nasional Akreditasi BALAKS Kemensos">
+                <field name="sequence" widget="handle"/>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="weight" string="Bobot (%)"/>
+                <field name="indicator_count"/>
+                <field name="description"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Standard Form -->
+    <record id="view_lks_balaks_standard_form" model="ir.ui.view">
+        <field name="name">lks.balaks.standard.form</field>
+        <field name="model">lks.balaks.standard</field>
+        <field name="arch" type="xml">
+            <form string="Standar Akreditasi BALAKS Kemensos">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" string="Nama Standar Nasional"/>
+                        <h1>
+                            <field name="name" placeholder="misal: Standar Program Pelayanan Sosial"/>
+                        </h1>
+                        <h3>
+                            <field name="code" placeholder="Kode Standar (misal: STD-01)"/>
+                        </h3>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="sequence"/>
+                            <field name="weight"/>
+                        </group>
+                        <group>
+                            <field name="description"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Daftar Indikator Penilaian &amp; Eviden" name="indicators">
+                            <field name="indicator_ids">
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="code"/>
+                                    <field name="name"/>
+                                    <field name="max_score"/>
+                                    <field name="required_evidence"/>
+                                    <field name="verification_guide"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_lks_balaks_standard" model="ir.actions.act_window">
+        <field name="name">6 Standar Nasional BALAKS Kemensos</field>
+        <field name="res_model">lks.balaks.standard</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Instrumen 6 Standar Nasional Akreditasi Lembaga Kesejahteraan Sosial (BALAKS Kemensos RI).
+            </p>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Education Record Tree -->
+    <record id="view_lks_education_record_tree" model="ir.ui.view">
+        <field name="name">lks.education.record.tree</field>
+        <field name="model">lks.education.record</field>
+        <field name="arch" type="xml">
+            <list string="Pendidikan Klien PPKS">
+                <field name="partner_id"/>
+                <field name="registration_number"/>
+                <field name="level" widget="badge"/>
+                <field name="school_name"/>
+                <field name="current_grade"/>
+                <field name="academic_year"/>
+                <field name="nisn"/>
+                <field name="funding_type"/>
+                <field name="status" widget="badge"
+                       decoration-success="status == 'enrolled'"
+                       decoration-info="status == 'graduated'"
+                       decoration-danger="status == 'dropped_out'"
+                       decoration-warning="status == 'transferred'"/>
+                <field name="report_card_count"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Education Record Form -->
+    <record id="view_lks_education_record_form" model="ir.ui.view">
+        <field name="name">lks.education.record.form</field>
+        <field name="model">lks.education.record</field>
+        <field name="arch" type="xml">
+            <form string="Data Pendidikan Klien PPKS">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="partner_id" string="Nama Klien PPKS"/>
+                        <h1>
+                            <field name="partner_id" options="{'no_create': True}"/>
+                        </h1>
+                        <h3>
+                            <field name="school_name" placeholder="Nama Sekolah / Madrasah / Lembaga Pendidikan"/>
+                        </h3>
+                    </div>
+                    <group>
+                        <group string="Informasi Akademik">
+                            <field name="registration_number"/>
+                            <field name="level"/>
+                            <field name="current_grade"/>
+                            <field name="academic_year"/>
+                            <field name="major" invisible="level not in ['smk', 'higher', 'vocational']"/>
+                            <field name="nisn"/>
+                            <field name="status" widget="badge"/>
+                        </group>
+                        <group string="Pembiayaan &amp; Ijazah">
+                            <field name="funding_type"/>
+                            <field name="foster_parent_name" invisible="funding_type != 'foster_parent'"/>
+                            <field name="diploma_number" invisible="status != 'graduated'"/>
+                            <field name="diploma_date" invisible="status != 'graduated'"/>
+                            <field name="diploma_file" filename="diploma_filename" invisible="status != 'graduated'"/>
+                            <field name="diploma_filename" invisible="1"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                    <group string="Alamat Sekolah &amp; Catatan Khusus">
+                        <field name="school_address" placeholder="Alamat lengkap sekolah..."/>
+                        <field name="notes" placeholder="Catatan minat bakat, hambatan belajar, atau prestasi..."/>
+                    </group>
+                    <notebook>
+                        <page string="Riwayat Rapor Semester" name="report_cards">
+                            <field name="report_card_ids">
+                                <list editable="bottom">
+                                    <field name="academic_year"/>
+                                    <field name="semester"/>
+                                    <field name="grade_level"/>
+                                    <field name="average_score"/>
+                                    <field name="rank"/>
+                                    <field name="behavior_grade" widget="badge"/>
+                                    <field name="achievements"/>
+                                    <field name="report_file" filename="report_filename"/>
+                                    <field name="report_filename" column_invisible="1"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- Education Record Search -->
+    <record id="view_lks_education_record_search" model="ir.ui.view">
+        <field name="name">lks.education.record.search</field>
+        <field name="model">lks.education.record</field>
+        <field name="arch" type="xml">
+            <search string="Pencarian Pendidikan">
+                <field name="partner_id" filter_domain="['|', ('partner_id.name', 'ilike', self), ('registration_number', 'ilike', self)]"/>
+                <field name="school_name"/>
+                <field name="nisn"/>
+                <separator/>
+                <filter string="Aktif Bersekolah" name="filter_enrolled" domain="[('status', '=', 'enrolled')]"/>
+                <filter string="Sudah Lulus" name="filter_graduated" domain="[('status', '=', 'graduated')]"/>
+                <filter string="Putus Sekolah" name="filter_dropped_out" domain="[('status', '=', 'dropped_out')]"/>
+                <separator/>
+                <filter string="SD/MI" name="filter_sd" domain="[('level', '=', 'sd')]"/>
+                <filter string="SMP/MTs" name="filter_smp" domain="[('level', '=', 'smp')]"/>
+                <filter string="SMA/SMK" name="filter_sma" domain="[('level', 'in', ['sma', 'smk'])]"/>
+                <filter string="SLB" name="filter_slb" domain="[('level', '=', 'slb')]"/>
+                <group expand="0" string="Kelompokkan Berdasarkan">
+                    <filter string="Jenjang Pendidikan" name="group_by_level" context="{'group_by': 'level'}"/>
+                    <filter string="Nama Sekolah" name="group_by_school" context="{'group_by': 'school_name'}"/>
+                    <filter string="Status" name="group_by_status" context="{'group_by': 'status'}"/>
+                    <filter string="Sumber Beasiswa" name="group_by_funding" context="{'group_by': 'funding_type'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_lks_education_record" model="ir.actions.act_window">
+        <field name="name">Data Pendidikan Klien PPKS</field>
+        <field name="res_model">lks.education.record</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_lks_education_record_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Catat riwayat dan perkembangan jenjang pendidikan anak asuh / klien binaan PPKS.
+            </p>
+        </field>
+    </record>
+</odoo>

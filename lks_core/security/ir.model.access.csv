@@ -1,0 +1,13 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_lks_ppks_category_user,lks.ppks.category.user,model_lks_ppks_category,group_lks_caregiver,1,0,0,0
+access_lks_ppks_category_peksos,lks.ppks.category.peksos,model_lks_ppks_category,group_lks_social_worker,1,0,0,0
+access_lks_ppks_category_manager,lks.ppks.category.manager,model_lks_ppks_category,group_lks_manager,1,1,1,1
+access_lks_facility_dormitory_caregiver,lks.facility.dormitory.caregiver,model_lks_facility_dormitory,group_lks_caregiver,1,0,0,0
+access_lks_facility_dormitory_peksos,lks.facility.dormitory.peksos,model_lks_facility_dormitory,group_lks_social_worker,1,1,1,0
+access_lks_facility_dormitory_manager,lks.facility.dormitory.manager,model_lks_facility_dormitory,group_lks_manager,1,1,1,1
+access_lks_facility_room_caregiver,lks.facility.room.caregiver,model_lks_facility_room,group_lks_caregiver,1,1,0,0
+access_lks_facility_room_peksos,lks.facility.room.peksos,model_lks_facility_room,group_lks_social_worker,1,1,1,0
+access_lks_facility_room_manager,lks.facility.room.manager,model_lks_facility_room,group_lks_manager,1,1,1,1
+access_lks_admission_register_caregiver,lks.admission.register.caregiver,model_lks_admission_register,group_lks_caregiver,1,0,0,0
+access_lks_admission_register_peksos,lks.admission.register.peksos,model_lks_admission_register,group_lks_social_worker,1,1,1,0
+access_lks_admission_register_manager,lks.admission.register.manager,model_lks_admission_register,group_lks_manager,1,1,1,1

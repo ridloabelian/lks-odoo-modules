@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <!-- Sequence: Nomor Registrasi Induk PPKS Panti -->
+    <record id="seq_lks_ppks_registration" model="ir.sequence">
+        <field name="name">Nomor Induk Registrasi PPKS</field>
+        <field name="code">lks.ppks.registration</field>
+        <field name="prefix">PPKS/%(year)s/</field>
+        <field name="padding">5</field>
+        <field name="company_id" eval="False"/>
+    </record>
+
+    <!-- Sequence: Berita Acara Penerimaan Klien (Admission Register) -->
+    <record id="seq_lks_admission_register" model="ir.sequence">
+        <field name="name">Berita Acara Penerimaan Klien Panti</field>
+        <field name="code">lks.admission.register</field>
+        <field name="prefix">BA-IN/%(year)s/%(month)s/</field>
+        <field name="padding">4</field>
+        <field name="company_id" eval="False"/>
+    </record>
+</odoo>

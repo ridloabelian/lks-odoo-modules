@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Medical Record Tree -->
+    <record id="view_lks_medical_record_tree" model="ir.ui.view">
+        <field name="name">lks.medical.record.tree</field>
+        <field name="model">lks.medical.record</field>
+        <field name="arch" type="xml">
+            <list string="Rekam Medis &amp; Profil Kesehatan PPKS">
+                <field name="partner_id"/>
+                <field name="registration_number"/>
+                <field name="gender"/>
+                <field name="age"/>
+                <field name="blood_type"/>
+                <field name="bpjs_type" widget="badge"/>
+                <field name="bpjs_number"/>
+                <field name="latest_weight"/>
+                <field name="latest_height"/>
+                <field name="latest_bmi"/>
+                <field name="latest_bmi_status" widget="badge"/>
+                <field name="visit_count"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Medical Record Form -->
+    <record id="view_lks_medical_record_form" model="ir.ui.view">
+        <field name="name">lks.medical.record.form</field>
+        <field name="model">lks.medical.record</field>
+        <field name="arch" type="xml">
+            <form string="Rekam Medis Klien PPKS">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="partner_id" string="Nama Klien PPKS"/>
+                        <h1>
+                            <field name="partner_id" options="{'no_create': True}"/>
+                        </h1>
+                        <div class="text-muted">
+                            No. Induk: <field name="registration_number" readonly="1"/> |
+                            Jenis Kelamin: <field name="gender" readonly="1"/> |
+                            Usia: <field name="age" readonly="1"/> Tahun
+                        </div>
+                    </div>
+                    <group>
+                        <group string="Profil Medis Dasar">
+                            <field name="blood_type"/>
+                            <field name="rhesus"/>
+                            <field name="allergies" placeholder="Daftar alergi makanan, obat-obatan, atau suhu..."/>
+                            <field name="chronic_diseases" placeholder="Penyakit bawaan atau kronis..."/>
+                            <field name="disability_special_needs" placeholder="Kebutuhan alat bantu medis..."/>
+                            <field name="dietary_needs" placeholder="Pantangan makanan / diet gizi khusus..."/>
+                        </group>
+                        <group string="Jaminan BPJS &amp; Faskes">
+                            <field name="bpjs_type"/>
+                            <field name="bpjs_number"/>
+                            <field name="bpjs_faskes"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                            <separator string="Status Fisik &amp; Gizi Terkini"/>
+                            <field name="latest_weight"/>
+                            <field name="latest_height"/>
+                            <field name="latest_bmi"/>
+                            <field name="latest_bmi_status"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Riwayat Pemeriksaan &amp; Kunjungan Medis" name="visits">
+                            <field name="visit_ids">
+                                <list>
+                                    <field name="date"/>
+                                    <field name="healthcare_facility" widget="badge"/>
+                                    <field name="facility_name"/>
+                                    <field name="medical_staff"/>
+                                    <field name="complaint"/>
+                                    <field name="diagnosis"/>
+                                    <field name="treatment"/>
+                                    <field name="prescription"/>
+                                    <field name="cost" sum="Total Biaya"/>
+                                    <field name="cost_coverage" widget="badge"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Riwayat Imunisasi &amp; Vaksinasi" name="immunizations">
+                            <field name="immunization_ids">
+                                <list editable="bottom">
+                                    <field name="vaccine_name"/>
+                                    <field name="vaccine_date"/>
+                                    <field name="dose"/>
+                                    <field name="administered_at"/>
+                                    <field name="batch_number"/>
+                                    <field name="notes"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- Medical Visit Tree -->
+    <record id="view_lks_medical_visit_tree" model="ir.ui.view">
+        <field name="name">lks.medical.visit.tree</field>
+        <field name="model">lks.medical.visit</field>
+        <field name="arch" type="xml">
+            <list string="Kunjungan &amp; Pemeriksaan Medis" default_order="date desc, id desc">
+                <field name="date"/>
+                <field name="partner_id"/>
+                <field name="healthcare_facility" widget="badge"/>
+                <field name="facility_name"/>
+                <field name="complaint"/>
+                <field name="diagnosis"/>
+                <field name="treatment"/>
+                <field name="weight"/>
+                <field name="blood_pressure"/>
+                <field name="cost" sum="Total Biaya Berobat"/>
+                <field name="cost_coverage"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Medical Visit Form -->
+    <record id="view_lks_medical_visit_form" model="ir.ui.view">
+        <field name="name">lks.medical.visit.form</field>
+        <field name="model">lks.medical.visit</field>
+        <field name="arch" type="xml">
+            <form string="Catatan Pemeriksaan Medis">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="medical_id" string="Rekam Medis Klien PPKS"/>
+                        <h1>
+                            <field name="medical_id" options="{'no_create': True}"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Waktu &amp; Fasilitas Pelayanan">
+                            <field name="partner_id"/>
+                            <field name="date"/>
+                            <field name="healthcare_facility"/>
+                            <field name="facility_name"/>
+                            <field name="medical_staff"/>
+                            <field name="follow_up_date"/>
+                        </group>
+                        <group string="Tanda-Tanda Vital Fisik">
+                            <field name="weight"/>
+                            <field name="height"/>
+                            <field name="bmi"/>
+                            <field name="blood_pressure"/>
+                            <field name="body_temperature"/>
+                            <field name="cost"/>
+                            <field name="cost_coverage"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                    <group string="Keluhan, Diagnosis &amp; Tindakan">
+                        <field name="complaint" placeholder="Keluhan utama yang dirasakan klien..."/>
+                        <field name="diagnosis" placeholder="Hasil diagnosis dokter / tenaga medis..."/>
+                        <field name="treatment" placeholder="Tindakan medis yang dilakukan..."/>
+                        <field name="prescription" placeholder="Obat-obatan dan dosis aturan pakai..."/>
+                        <field name="notes" placeholder="Catatan pantangan / anjuran istirahat..."/>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- Actions -->
+    <record id="action_lks_medical_record" model="ir.actions.act_window">
+        <field name="name">Rekam Medis Klien PPKS</field>
+        <field name="res_model">lks.medical.record</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Kelola rekam medis, alergi, penyakit bawaan, dan riwayat kesehatan klien panti.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_lks_medical_visit" model="ir.actions.act_window">
+        <field name="name">Kunjungan Medis &amp; Berobat</field>
+        <field name="res_model">lks.medical.visit</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Catat setiap kunjungan pemeriksaan kesehatan, kontrol rutin, atau rujukan ke Puskesmas/RS.
+            </p>
+        </field>
+    </record>
+</odoo>
