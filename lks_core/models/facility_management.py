@@ -102,9 +102,12 @@ class LksFacilityDormitory(models.Model):
         default=True,
     )
 
-    _sql_constraints = [
-        ("code_company_uniq", "unique(code, company_id)", "Kode Asrama harus unik untuk setiap lembaga!"),
-    ]
+    if hasattr(models, "Constraint"):
+        _code_company_uniq = models.Constraint("unique(code, company_id)", "Kode Asrama harus unik untuk setiap lembaga!")
+    else:
+        _sql_constraints = [
+            ("code_company_uniq", "unique(code, company_id)", "Kode Asrama harus unik untuk setiap lembaga!"),
+        ]
 
     @api.depends("room_ids.capacity", "room_ids.occupant_count")
     def _compute_counts(self):
@@ -196,9 +199,12 @@ class LksFacilityRoom(models.Model):
         readonly=True,
     )
 
-    _sql_constraints = [
-        ("name_dormitory_uniq", "unique(name, dormitory_id)", "Nama/Nomor Kamar dalam asrama yang sama harus unik!"),
-    ]
+    if hasattr(models, "Constraint"):
+        _name_dormitory_uniq = models.Constraint("unique(name, dormitory_id)", "Nama/Nomor Kamar dalam asrama yang sama harus unik!")
+    else:
+        _sql_constraints = [
+            ("name_dormitory_uniq", "unique(name, dormitory_id)", "Nama/Nomor Kamar dalam asrama yang sama harus unik!"),
+        ]
 
     @api.depends("occupant_ids")
     def _compute_occupants(self):

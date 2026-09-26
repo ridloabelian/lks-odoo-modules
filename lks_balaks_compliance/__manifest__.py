@@ -4,7 +4,7 @@
 {
     "name": "Kepatuhan Akreditasi LKS & Ekspor SIKS-NG Kemensos",
     "summary": "Audit Kesiapan 6 Standar Nasional BALAKS Kemensos, Profil Lembaga, dan Ekspor Data Binaan SIKS-NG / Dinsos",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "category": "Social Welfare/Non-Profit",
     "author": "Lembaga Kesejahteraan Sosial (LKS) Indonesia, Odoo Community Association (OCA)",
     "website": "https://github.com/lks-odoo-modules",

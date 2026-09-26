@@ -4,7 +4,7 @@
 {
     "name": "LKS & Panti Sosial - Manajemen Asuhan & Perkembangan PPKS (Case Management)",
     "summary": "Case Management PPKS, Monitoring Pendidikan & Rapor, Rekam Medis Panti, Rencana Intervensi & Terminasi/Reuni",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "category": "Social Welfare/Non-Profit",
     "author": "Lembaga Kesejahteraan Sosial (LKS) Indonesia, Odoo Community Association (OCA)",
     "website": "https://github.com/lks-odoo-modules",
