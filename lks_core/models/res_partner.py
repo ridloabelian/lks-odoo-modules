@@ -205,13 +205,19 @@ class ResPartner(models.Model):
         compute="_compute_admission_count",
     )
 
-    _sql_constraints = [
-        (
-            "registration_number_uniq",
+    if hasattr(models, "Constraint"):
+        _registration_number_uniq = models.Constraint(
             "unique(registration_number, company_id)",
             "Nomor Induk Registrasi PPKS sudah digunakan dalam lembaga ini! Harus unik.",
-        ),
-    ]
+        )
+    else:
+        _sql_constraints = [
+            (
+                "registration_number_uniq",
+                "unique(registration_number, company_id)",
+                "Nomor Induk Registrasi PPKS sudah digunakan dalam lembaga ini! Harus unik.",
+            ),
+        ]
 
     @api.depends("admission_register_ids")
     def _compute_admission_count(self):

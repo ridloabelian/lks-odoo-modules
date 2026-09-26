@@ -4,7 +4,7 @@
 {
     "name": "Akuntansi Nonlaba & Yayasan Sosial (ISAK 35)",
     "summary": "Bagan Akun Standar (COA) dan 4 Laporan Keuangan Wajib Entitas Nonlaba berbasis ISAK 35 IAI",
-    "version": "19.0.1.0.0",
+    "version": "18.0.1.0.0",
     "category": "Accounting/Localizations",
     "author": "Lembaga Kesejahteraan Sosial (LKS) Indonesia, Odoo Community Association (OCA)",
     "website": "https://github.com/lks-odoo-modules",

@@ -4,7 +4,7 @@
 {
     "name": "LKS & Panti Sosial - Core & Buku Induk",
     "summary": "Master Data 26 Kategori PPKS Kemensos RI, Buku Induk Panti, dan Manajemen Residensial Asrama",
-    "version": "19.0.1.0.0",
+    "version": "18.0.1.0.0",
     "category": "Social Welfare/Non-Profit",
     "author": "Lembaga Kesejahteraan Sosial (LKS) Indonesia, Odoo Community Association (OCA)",
     "website": "https://github.com/lks-odoo-modules",
