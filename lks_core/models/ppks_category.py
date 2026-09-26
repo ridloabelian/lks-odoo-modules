@@ -73,9 +73,12 @@ class LksPpksCategory(models.Model):
         compute="_compute_client_count",
     )
 
-    _sql_constraints = [
-        ("code_uniq", "unique(code)", "Kode Kategori PPKS harus unik!"),
-    ]
+    if hasattr(models, "Constraint"):
+        _code_uniq = models.Constraint("unique(code)", "Kode Kategori PPKS harus unik!")
+    else:
+        _sql_constraints = [
+            ("code_uniq", "unique(code)", "Kode Kategori PPKS harus unik!"),
+        ]
 
     def _compute_client_count(self):
         partner_obj = self.env["res.partner"]

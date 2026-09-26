@@ -43,9 +43,12 @@ class LksBalaksStandard(models.Model):
         compute="_compute_indicator_count",
     )
 
-    _sql_constraints = [
-        ("code_uniq", "unique(code)", "Kode Standar Akreditasi harus unik!"),
-    ]
+    if hasattr(models, "Constraint"):
+        _code_uniq = models.Constraint("unique(code)", "Kode Standar Akreditasi harus unik!")
+    else:
+        _sql_constraints = [
+            ("code_uniq", "unique(code)", "Kode Standar Akreditasi harus unik!"),
+        ]
 
     @api.depends("indicator_ids")
     def _compute_indicator_count(self):
@@ -98,9 +101,12 @@ class LksBalaksIndicator(models.Model):
         string="Panduan Verifikasi Asesor / Surveyor",
     )
 
-    _sql_constraints = [
-        ("code_uniq", "unique(code)", "Kode Indikator Akreditasi harus unik!"),
-    ]
+    if hasattr(models, "Constraint"):
+        _code_uniq = models.Constraint("unique(code)", "Kode Indikator Akreditasi harus unik!")
+    else:
+        _sql_constraints = [
+            ("code_uniq", "unique(code)", "Kode Indikator Akreditasi harus unik!"),
+        ]
 
     @api.depends("code", "name")
     def _compute_display_name(self):

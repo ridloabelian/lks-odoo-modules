@@ -1,8 +1,8 @@
 # LKS Odoo Modules (`lks-odoo-modules`)
 ### Sistem Informasi Manajemen Lembaga Kesejahteraan Sosial (LKS), Panti Asuhan & Organisasi Sosial Indonesia
-**Berbasis Odoo 18.0 LTS & 19.0 Community Edition | Standar OCA | Lisensi LGPL-3.0**
+**Berbasis Odoo 18.0 LTS, 19.0 & 20.0 Community Edition | Standar OCA | Lisensi LGPL-3.0**
 
-[![Odoo Version](https://img.shields.io/badge/Odoo-18.0%20%7C%2019.0-714B67?logo=odoo)](https://odoo.com)
+[![Odoo Version](https://img.shields.io/badge/Odoo-18.0%20%7C%2019.0%20%7C%2020.0-714B67?logo=odoo)](https://odoo.com)
 [![Standard](https://img.shields.io/badge/Standard-OCA%20%7C%20Kemensos%20RI%20%7C%20ISAK%2035-047857)](https://kemensos.go.id)
 [![License](https://img.shields.io/badge/License-LGPL--3.0-blue.svg)](LICENSE)
 
