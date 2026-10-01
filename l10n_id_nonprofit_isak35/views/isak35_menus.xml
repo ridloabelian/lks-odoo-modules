@@ -17,4 +17,11 @@
               parent="menu_lks_finance_main"
               action="account.action_account_form"
               sequence="20"/>
+
+    <!-- Shortcut in Standard Invoicing/Accounting Reporting Menu -->
+    <menuitem id="menu_accounting_isak35_report"
+              name="4 Laporan Keuangan Nonlaba (ISAK 35)"
+              parent="account.menu_finance_reports"
+              action="action_isak35_financial_report_wizard"
+              sequence="5"/>
 </odoo>
